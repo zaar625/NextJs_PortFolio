@@ -1,0 +1,6 @@
+@use '../../app/globals.scss' as *;
+
+.header{
+    background-color: red;
+    height: $header-height;
+}
