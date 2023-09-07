@@ -1,8 +1,9 @@
 import './globals.scss';
+import HeroSlide from '@/components/hero-slide/HeroSlide';
 
 export default function Home() {
   return (
     
-    <h1></h1>
+    <HeroSlide/>
   )
 }
