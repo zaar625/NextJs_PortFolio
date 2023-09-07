@@ -10,6 +10,11 @@
     transition: height 0.3s ease, background-color 0.3s ease;
 
     &__wrap {
+        margin: auto;
+        height: 100%
+    }
+
+    &__top {
         @include flex(center, space-between);
         height: 100%;
         padding:0 2rem;
@@ -90,9 +95,6 @@
         }
     }
 }
-.menu {
-    
-}
 
 .logo {
     position: absolute;
@@ -101,4 +103,15 @@
     color:$primary;
     right: 50%;
     transform: translateX(50%);
+}
+
+.product-nav {
+    @include flex(unset, unset);
+    padding: 0 2rem;
+    gap:1rem;
+    flex-wrap: wrap;
+
+    & > li{
+        font-size: 0.8rem;
+    }
 }
