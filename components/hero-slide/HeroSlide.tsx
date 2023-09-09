@@ -1,13 +1,16 @@
 'use client'
 
 import React,{useEffect, useState} from 'react'
+import Link from 'next/link';
 import Image from 'next/image';
 import { Swiper, SwiperSlide,useSwiper } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import { heroSlideData } from '@/constant/heroData';
 import {AiOutlinePause} from 'react-icons/ai'
 import {GrFormNext, GrFormPrevious} from 'react-icons/gr'
+import BaseButton from '../buttons/BaseButton';
 import {FiPlay} from 'react-icons/fi'
+
 import './hero-slide.scss';
 import 'swiper/css';
 
@@ -24,7 +27,7 @@ export default function HeroSlide() {
         }}
         spaceBetween={0}
         slidesPerView={1}
-        autoplay={{ delay: 3000,disableOnInteraction:false }}
+        autoplay={{ delay: 4000,disableOnInteraction:false }}
       >
        {heroSlideData.map((slide, index) => (
         <SwiperSlide key={index}>
@@ -37,9 +40,9 @@ export default function HeroSlide() {
                     <h2 className="title">{slide.title}</h2>
                     <p className="des">{slide.des}</p>
                     <div className="btns">
-                      {/* <Link to="/products">
-                        <Button className="null">View more</Button>
-                      </Link> */}
+                      <Link href={'/'}>
+                        <BaseButton className="null">View more</BaseButton>
+                      </Link>
                     </div>
                   </div>
                   <div className="hero-slide__item__content__poster">
@@ -74,7 +77,7 @@ function SwiperButton({pageNum}:{pageNum:number}) {
         <button className='slide-player__button' onClick={()=>swiper.slidePrev()}>
           <GrFormPrevious/>
         </button>
-        <p className='slide-player__page'>{pageNum}/3</p>
+        <p className='slide-player__page'>{pageNum} / 3</p>
         <button className='slide-player__button'  onClick={()=>swiper.slideNext()}>
           <GrFormNext/> 
         </button>

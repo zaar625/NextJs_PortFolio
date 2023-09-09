@@ -1,0 +1,32 @@
+import './new-arrival.scss'
+
+import React from 'react'
+import BaseButton from '../buttons/BaseButton'
+import Link from 'next/link'
+import Image from 'next/image'
+import ProductCard from '../product/ProductCard'
+
+import newItemImg1 from '../../public/images/new-main1.jpg';
+import newItemImg2 from '../../public/images/new-main2.jpg';
+
+export default function NewArrival() {
+  return (
+    <section className='new-arrival'>
+      <div className='new-arrival__title'>
+          <h1>New Arrival</h1>
+          <Link href={'/'}>
+              <BaseButton>View more</BaseButton>
+          </Link>
+      </div>
+      <div className='new-arrival__image-box'>
+          <Image src={newItemImg1} alt='신규 상품' sizes='50vw'/>
+          <Image src={newItemImg2} alt='신규 상품' sizes='50vw'/>
+      </div>
+      <div className='new-arrival__des-box'>
+        <h3>CHANGING THE <span>IDEAL</span> OF BEAUTY</h3>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five </p>
+      </div>
+      <ProductCard/>
+    </section>
+  )
+}
