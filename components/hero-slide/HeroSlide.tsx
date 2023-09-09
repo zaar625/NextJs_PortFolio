@@ -14,12 +14,14 @@ import 'swiper/css';
 
 
 export default function HeroSlide() {
-  const [slidePlayer, setSlidePlayer] = useState(true);
-
+  const [pageNum, setPageNum] = useState(1)
   return (
     <section className='hero-slide'>
       <Swiper
         modules={[Autoplay]}
+        onSlideChange={(swipe) => {
+          setPageNum(swipe.activeIndex + 1);
+        }}
         spaceBetween={0}
         slidesPerView={1}
         autoplay={{ delay: 3000,disableOnInteraction:false }}
@@ -48,13 +50,13 @@ export default function HeroSlide() {
             )}
         </SwiperSlide>
        ))}
-       <SwiperButton/>
+       <SwiperButton pageNum={pageNum}/>
       </Swiper>
     </section>
   )
 }
 
-function SwiperButton() {
+function SwiperButton({pageNum}:{pageNum:number}) {
   const [autoPlay, setAutoPlay] = useState(true);
   const swiper = useSwiper();
 
@@ -72,7 +74,7 @@ function SwiperButton() {
         <button className='slide-player__button' onClick={()=>swiper.slidePrev()}>
           <GrFormPrevious/>
         </button>
-        <p className='slide-player__page'>0/3</p>
+        <p className='slide-player__page'>{pageNum}/3</p>
         <button className='slide-player__button'  onClick={()=>swiper.slideNext()}>
           <GrFormNext/> 
         </button>
