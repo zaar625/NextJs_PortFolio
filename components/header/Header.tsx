@@ -27,7 +27,7 @@ export default function Header() {
           {headerNav.map((link, index) => {
           const isActive = pathName === link.path;
           return (
-            <li>
+            <li key={index}>
               <Link  href={link.path} key={link.display} className={`${isActive ? 'active' : ''}`}>{link.display}</Link>
             </li>
           )
@@ -38,7 +38,7 @@ export default function Header() {
             <ul className='product-nav'>
               {productNav.map((link, index) => {
               return (
-                <li>
+                <li key={index}>
                   <Link href={'/'} key={link.display}>{link.display}</Link>
                 </li>
               )

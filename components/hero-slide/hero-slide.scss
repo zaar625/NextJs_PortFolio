@@ -118,3 +118,30 @@
         }
     }
 }
+
+.slide-player {
+    @include flex(center, center);
+    &__page{
+        margin: 0 10px;
+        font-size: 1rem;
+    }
+
+    &__button {
+        @include flex(center,center);
+        
+    }
+    &  svg {
+        font-size: 1.25rem;
+        cursor: pointer;
+    }
+
+    &__autoPlay {
+        @include flex(center, center);
+        
+        & > svg {
+            font-size: 1rem;
+        }
+    }
+
+    
+}
