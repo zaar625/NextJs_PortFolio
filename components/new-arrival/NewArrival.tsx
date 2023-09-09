@@ -5,11 +5,22 @@ import BaseButton from '../buttons/BaseButton'
 import Link from 'next/link'
 import Image from 'next/image'
 import ProductCard from '../product/ProductCard'
+import { collection, doc, getDoc,getFirestore ,query, where, getDocs} from "firebase/firestore";
+import {app} from '../../lib/firebaseConfig'
 
 import newItemImg1 from '../../public/images/new-main1.jpg';
 import newItemImg2 from '../../public/images/new-main2.jpg';
 
-export default function NewArrival() {
+export default async function NewArrival() {
+  const db = getFirestore(app);
+  const docRef = collection(db, "products");
+  const q = query(docRef, where('ver', '==', 'new'))
+  
+
+const querySnapshot = (await getDocs(q)).docs;
+const products = querySnapshot.map((item) => item.data());
+
+const data = products.slice(0,5);
   return (
     <section className='new-arrival'>
       <div className='new-arrival__title'>
@@ -26,7 +37,14 @@ export default function NewArrival() {
         <h3>CHANGING THE <span>IDEAL</span> OF BEAUTY</h3>
         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five </p>
       </div>
-      <ProductCard/>
+      <div className='products-container'>
+        {
+          data.map((product) => (
+            <ProductCard data={product}/> 
+          ))
+        }
+      </div>
+      
     </section>
   )
 }

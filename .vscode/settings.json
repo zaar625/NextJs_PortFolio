@@ -1,6 +1,9 @@
 {
     "editor.fontSize": 12,
+    "files.autoSave": "onFocusChange",
     "editor.formatOnSave": true,
-    "eslint.codeActionsOnSave.rules": null,
-    "files.autoSave": "onFocusChange"
+    "editor.codeActionsOnSave":{
+        "source.fixAll.eslint": true
+      }
+    
 }

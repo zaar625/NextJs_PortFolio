@@ -6,5 +6,8 @@ module.exports = {
     sassOptions: {
       includePaths: [path.join(__dirname, 'styles')],
     },
-    nextConfig
+    nextConfig,
+    images:{
+      domains:['firebasestorage.googleapis.com']
+  }
   }
