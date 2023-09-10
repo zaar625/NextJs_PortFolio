@@ -15,15 +15,15 @@ export default function Header() {
   const pathName = usePathname();
 
   return (
-    <div className='header'>
-      <div className='header__wrap'>
+    <header className='header'>
+      <nav className='header__wrap'>
         <div className='header__top container'>
           <p className='logo'>BABAN</p>   
-          <div className='menu' onClick={()=>setMenuIsActive(!menuIsActive) }>
+          <button className='menu' onClick={()=>setMenuIsActive(!menuIsActive) }>
           {menuIsActive ? <AiOutlineClose/> : <AiOutlineMenu/> }   
-          </div>
+          </button>
           
-          <ul className='header__nav-right'>
+          <ul className='         header__nav-right'>
           {headerNav.map((link, index) => {
           const isActive = pathName === link.path;
           return (
@@ -45,8 +45,8 @@ export default function Header() {
             })}
           </ul>) 
         }
-      </div>
+      </nav>
      
-    </div>
+    </header>
   )
 }

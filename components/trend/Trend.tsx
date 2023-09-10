@@ -17,9 +17,9 @@ export default async function Trend() {
   const data = products.slice(0,5);
 
   return (
-    <section>
+    <section className='new-arrival mb-4'>
         <div className='new-arrival__title'>
-          <h1>New Arrival</h1>
+          <h1>Trend Item</h1>
           <Link href={'/'}>
               <BaseButton>View more</BaseButton>
           </Link>

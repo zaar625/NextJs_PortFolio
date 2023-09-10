@@ -3,7 +3,6 @@
 
 .new-arrival{
     padding: 0 2rem;
-    margin-bottom: 20px;
 
     &__title{
         @include flex(center, space-between);
@@ -37,6 +36,10 @@
         flex-direction: column;
         gap: 10px;
         margin: 20px auto;
+
+        @include mobile {
+            width: 80%;
+        }
         
         & span {
             color:#d98181
@@ -48,6 +51,12 @@
 
     & .products-container{
         @include flex(unset, center);
+
+        @media only screen and (max-width:600px) {
+            & a {
+                width: 28%;
+            }
+        }
        
     }
 }

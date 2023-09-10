@@ -66,5 +66,9 @@
 
 .products-container {
     @include flex(unset,unset);
-    gap:10px
+    gap:10px;
+
+    @media only screen and (max-width: 600px) {
+        flex-wrap: wrap;
+    }
 }

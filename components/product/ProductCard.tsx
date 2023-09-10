@@ -8,6 +8,7 @@ import numberWithCommas from '@/util/numberWithCommas';
 export default function ProductCard({data}:any) {
   
   return (
+    <>
     <Link href={'/'}>
      <div className='product-card'>
         <Image src={data.image} alt='' 
@@ -26,5 +27,6 @@ export default function ProductCard({data}:any) {
      </div>
      <p className='product-card__name'>{data.name}</p>
     </Link>
+    </>
   )
 }

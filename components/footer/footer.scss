@@ -1,13 +1,13 @@
 @use '../../app/globals.scss' as *;
 
 .footer{
-    margin:20px 0 5rem 0;
 
     @include flex (unset,space-between);
+    @include mobile {
+        margin-bottom: 4rem;
+    }
     gap: 1rem;
     padding: 1rem;
-
-  
 
     &__content {
 
