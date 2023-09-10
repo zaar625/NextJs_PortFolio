@@ -1,6 +1,6 @@
 'use client'
 
-import React,{useState} from 'react';
+import React,{useState,useEffect,useRef} from 'react';
 import { usePathname } from 'next/navigation'
 import Link from 'next/link';
 import {AiOutlineMenu,AiOutlineClose} from 'react-icons/ai'
@@ -11,11 +11,30 @@ import './header.scss';
 
 export default function Header() {
   const [menuIsActive, setMenuIsActive] = useState(false) 
-
+  const headerRef = useRef<HTMLDivElement>(null);
   const pathName = usePathname();
 
+  useEffect(() => {
+    const shrinkHeader = () => {
+      if (headerRef !== null) {
+        if (
+          document.body.scrollTop > 100 ||
+          document.documentElement.scrollTop > 100
+        ) {
+          headerRef.current?.classList.add('shrink');
+        } else {
+          headerRef.current?.classList.remove('shrink');
+        }
+      }
+    };
+    window.addEventListener('scroll', shrinkHeader);
+    return () => {
+      window.removeEventListener('scroll', shrinkHeader);
+    };
+  }, []);
+
   return (
-    <header className='header'>
+    <header ref ={headerRef}className='header'>
       <nav className='header__wrap'>
         <div className='header__top container'>
           <p className='logo'>BABAN</p>   
@@ -43,8 +62,8 @@ export default function Header() {
                 </li>
               )
             })}
-          </ul>) 
-        }
+            </ul>) 
+          }
       </nav>
      
     </header>

@@ -9,13 +9,21 @@
     z-index:99;
     transition: height 0.3s ease, background-color 0.3s ease;
 
+    &.shrink{
+        height: $header-shrink-height;
+        background-color: #FFF;
+    }
+
     &__wrap {
         margin: auto;
-        height: 100%
+        height: 100%;
+        display: flex;
+        flex-direction: column;
     }
 
     &__top {
         @include flex(center, space-between);
+        width: 100%;
         height: 100%;
         padding:0 2rem;
 

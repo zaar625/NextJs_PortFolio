@@ -22,7 +22,7 @@ const products = querySnapshot.map((item) => item.data());
 
 const data = products.slice(0,5);
   return (
-    <section className='new-arrival mb-4 '>
+    <section className='new-arrival mb-4 container'>
       <div className='new-arrival__title'>
           <h1>New Arrival</h1>
           <Link href={'/'}>
