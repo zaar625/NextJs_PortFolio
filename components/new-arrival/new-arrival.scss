@@ -3,6 +3,7 @@
 
 .new-arrival{
     padding: 0 2rem;
+    margin-bottom: 20px;
 
     &__title{
         @include flex(center, space-between);
@@ -43,5 +44,10 @@
         & > * {
             text-align: center;
         }
+    }
+
+    & .products-container{
+        @include flex(unset, center);
+       
     }
 }

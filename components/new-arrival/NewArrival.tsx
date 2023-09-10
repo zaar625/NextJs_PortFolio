@@ -5,7 +5,7 @@ import BaseButton from '../buttons/BaseButton'
 import Link from 'next/link'
 import Image from 'next/image'
 import ProductCard from '../product/ProductCard'
-import { collection, doc, getDoc,getFirestore ,query, where, getDocs} from "firebase/firestore";
+import { collection,getFirestore ,query, where, getDocs} from "firebase/firestore";
 import {app} from '../../lib/firebaseConfig'
 
 import newItemImg1 from '../../public/images/new-main1.jpg';
