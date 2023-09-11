@@ -1,0 +1,39 @@
+@use '@/app/globals.scss' as *;
+
+.consent {
+    padding-top: 9rem;
+    width: 340px;
+    margin: auto;
+    @include flex(unset, center);
+    flex-direction: column;
+
+    & > h1 {
+        text-align: center;
+        
+    }
+
+    &__next-button{
+        width: 100%;
+        background-color: $primary;
+        border-radius: 10px;
+        text-align: center;
+        height: 44px;
+        color:#FFF;
+        cursor: pointer;
+    }
+}
+
+.icon-wrapper {
+    @include flex(center,unset);
+
+    & > input {
+        width: 20px;
+        height: 20px;
+        opacity: 0;
+        position: absolute;
+    }
+
+    margin-bottom: 10px;
+
+    cursor: pointer;
+}

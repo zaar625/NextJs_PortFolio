@@ -1,12 +1,16 @@
+'use client'
+
 import React from 'react';
+import {signIn} from 'next-auth/react';
+import Link from 'next/link';
 import './page.scss';
 
 
-export default function page() {
+
+export default function LoginPage() {
 
   return (
     <div className='login'>
-      
         <form className='login__form'>
             <h1>로그인을 해주세요.</h1>
             <div className='login__email'>
@@ -22,11 +26,13 @@ export default function page() {
 
         <div className='social'>
           <p>간편하게 로그인해보세요</p>
-          <button className='login__button mb-1'>카카오 로그인</button>
-          <button className='login__button mb-1'>구글 로그인</button>
+          <button className='login__button mb-1' onClick={() => signIn("kakao")}>카카오 로그인</button>
+          <button className='login__button mb-1' onClick={()=>signIn('google')}>구글 로그인</button>
           <div className='social__signup'>
             <p>가입만 해도 즉시 1만원 할인</p>
-            <button className='social__signup__button'>회원가입</button>
+            <Link href={'/login/consent'}>
+              <button className='social__signup__button'>회원가입</button>
+            </Link>
           </div>
         </div>
 
