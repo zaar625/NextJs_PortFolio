@@ -8,8 +8,8 @@ import Image from 'next/image';
 import 'swiper/css';
 
 
-export default function ProductSlide({products}:any) {
-    console.log(products);
+export default function ProductSlide({product}:any) {
+  
     const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
   return (
     <div className='productDetail__imageBox'>
@@ -22,7 +22,7 @@ export default function ProductSlide({products}:any) {
         thumbs={{swiper:thumbsSwiper}}
         className='productDetail__imageBox__slider'
       >
-        {products[0].imageDetail.map((item, index) => (
+        {product[0].imageDetail.map((item:any, index:any) => (
             <SwiperSlide key={index}>
                 <Image src={item} alt="product images" 
                 width={450}
@@ -40,7 +40,7 @@ export default function ProductSlide({products}:any) {
             slidesPerView={4}
             className="product-images-slider-thumbs"
         >
-            {products[0].imageDetail.map((item, index) => (
+            {product[0].imageDetail.map((item:any, index:any) => (
                 <SwiperSlide key={index}>
                     <div className="product-images-slider-thumbs-wrapper">
                         <img src={item} alt="product images" />

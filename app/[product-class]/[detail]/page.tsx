@@ -3,6 +3,7 @@ import './product-detail.scss';
 import ProductSlide from './components/ProductSlide';
 import { collection,getFirestore ,query, where, getDocs} from "firebase/firestore";
 import {app} from '../../../lib/firebaseConfig'
+import ProductDesc from './components/ProductDesc';
 
 export default async function ProductiDetailPage({params}:{params:any}) {
 
@@ -12,7 +13,7 @@ export default async function ProductiDetailPage({params}:{params:any}) {
   const docRef = collection(db, "products");
   const q = query(docRef, where('name', '==',`${searchTerm}`));
   const querySnapshot = (await getDocs(q)).docs;
-  const products = querySnapshot.map((item) => item.data());
+  const product = querySnapshot.map((item) => item.data());
  
   return (
   <section className="productDetail container section">
@@ -27,14 +28,8 @@ export default async function ProductiDetailPage({params}:{params:any}) {
         </p>
       </div>
     </div>
-
-
-    <ProductSlide products={products}/>
-    
-
-    <div className='productDetail__des'>
-
-    </div>
+    <ProductSlide product={product}/>
+    <ProductDesc product={product}/>
   </section>
   )
 }
