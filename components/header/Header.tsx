@@ -6,6 +6,7 @@ import Link from 'next/link';
 import {AiOutlineMenu,AiOutlineClose} from 'react-icons/ai'
 import { headerNav , productNav} from '@/constant/navigation';
 
+
 import './header.scss';
 
 
@@ -37,7 +38,11 @@ export default function Header() {
     <header ref ={headerRef}className='header'>
       <nav className='header__wrap'>
         <div className='header__top container'>
-          <p className='logo'>BABAN</p>   
+          <p className='logo'>
+            <Link href={'/'}>
+              BABAN
+            </Link>
+          </p>
           <button className='menu' onClick={()=>setMenuIsActive(!menuIsActive) }>
           {menuIsActive ? <AiOutlineClose/> : <AiOutlineMenu/> }   
           </button>

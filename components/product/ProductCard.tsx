@@ -9,7 +9,7 @@ export default function ProductCard({data}:any) {
   
   return (
     <>
-    <Link href={'/'}>
+    <Link href={`/${data.class}/${data.name}`}>
      <div className='product-card'>
         <Image src={data.image} alt='' 
          width={190}
