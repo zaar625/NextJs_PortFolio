@@ -6,7 +6,6 @@ import {loadTossPayments} from '@tosspayments/payment-sdk'
 export default function Toss() {
 
   const handleClick = async () => {
-    console.log('click')
     const tossPayments = await loadTossPayments(process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY as string);
 
     await tossPayments.requestPayment("카드",{

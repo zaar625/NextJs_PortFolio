@@ -1,9 +1,5 @@
 export const headerNav = [
     {
-      display: 'login',
-      path:'/login',
-    },
-    {
       display:'like',
       path:'/like'
     },

@@ -5,21 +5,22 @@ import { usePathname } from 'next/navigation'
 import Link from 'next/link';
 import {AiOutlineMenu,AiOutlineClose} from 'react-icons/ai'
 import { headerNav , productNav} from '@/constant/navigation';
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import {app} from '@/lib/firebaseConfig'
-
+import { getAuth } from "firebase/auth";
+import {app} from '@/lib/firebaseConfig';
+import { useSession,signOut } from "next-auth/react"
 
 import './header.scss';
 
 
 export default function Header() {
   const [menuIsActive, setMenuIsActive] = useState(false) 
+  const { data: snsSession } = useSession()
+  
   const headerRef = useRef<HTMLDivElement>(null);
   const pathName = usePathname();
   const auth = getAuth(app);
-  const user = auth.currentUser;
-
-  console.log(user)
+  const firebaseUser = auth.currentUser 
+  console.log(firebaseUser, snsSession)
 
   useEffect(() => {
     const shrinkHeader = () => {
@@ -40,6 +41,25 @@ export default function Header() {
     };
   }, []);
 
+  const logout = () => {
+    if (window.confirm('로그아웃하시겠습니까?')) {
+      if(firebaseUser){
+        auth.signOut();
+      }
+
+      if(snsSession){
+        signOut();
+      }
+
+      alert('로그아웃되었습니다.');
+      window.location.replace('/');
+    }
+
+   
+    
+
+  }
+
   return (
     <header ref ={headerRef}className='header'>
       <nav className='header__wrap'>
@@ -53,7 +73,10 @@ export default function Header() {
           {menuIsActive ? <AiOutlineClose/> : <AiOutlineMenu/> }   
           </button>
           
-          <ul className='         header__nav-right'>
+          <ul className='header__nav-right'>
+          <li>
+            {firebaseUser || snsSession ? <button onClick={logout}>logout</button> : <Link href={'/login'}>login</Link>}
+          </li>
           {headerNav.map((link, index) => {
           const isActive = pathName === link.path;
           return (

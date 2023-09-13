@@ -1,3 +1,4 @@
+import { redirect } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
@@ -17,7 +18,12 @@ export const authOption = {
     ],
     pages: {
         signIn: "/auth/signIn",
-      },
+    },
+    callbacks: {
+        async redirect() {
+            return '/'
+          },
+    },
 }
 
 const handler = NextAuth(authOption);

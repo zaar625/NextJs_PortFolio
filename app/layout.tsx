@@ -2,6 +2,7 @@
 import type { Metadata } from 'next'
 import Header from '@/components/header/Header'
 import { Inter } from 'next/font/google'
+import AuthSession from '@/components/AuthSession';
 import '../scss/reset.modules.scss';
 import Footer from '@/components/footer/Footer';
 
@@ -21,11 +22,15 @@ export default function RootLayout({
     <html lang="en">
       
       <body className={inter.className}>
-        <Header/>
-        <main>
-        {children}
-        </main>
-        <Footer/>
+        <AuthSession>
+          <>
+            <Header/>
+            <main>
+            {children}
+            </main>
+            <Footer/>
+          </>
+        </AuthSession>
       </body>
     </html>
   )
