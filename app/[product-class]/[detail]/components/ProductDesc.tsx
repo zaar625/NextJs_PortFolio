@@ -1,6 +1,6 @@
 'use client';
 
-import React,{useState} from 'react'
+import React,{useState, useCallback} from 'react'
 import Link from 'next/link';
 import {AiOutlineMinusSquare,AiOutlinePlusSquare} from 'react-icons/ai'
 import BaseButton from '@/components/buttons/BaseButton';
@@ -8,15 +8,21 @@ import { getAuth } from 'firebase/auth';
 import { useSession } from "next-auth/react"
 import {app} from '@/lib/firebaseConfig'
 import { useRouter } from 'next/navigation'
+import { useDispatch } from 'react-redux';
+import { addItem } from '@/redux/slice/cartItem';
 
 
 export default function ProductDesc({product}:any) {
   const auth = getAuth(app);
-  const { data: snsSession } = useSession();
   const router = useRouter();
+  const { data: snsSession } = useSession();
+  const isLoginUser = auth.currentUser || snsSession;
+  const dispatch = useDispatch();
+
 
   const [color, setColor] = useState('');
   const [quantity, setQuantity] = useState(1); //수량
+
   const updateQuantity = (type: string) => {
       if (type === 'plus') {
         setQuantity(quantity + 1);
@@ -24,7 +30,7 @@ export default function ProductDesc({product}:any) {
         setQuantity(quantity - 1 < 1 ? 1 : quantity - 1);
       }
   };
-  const isLoginUser = auth.currentUser || snsSession;
+  
 
   const nonUserBtnClickHandler = () => {
     if(!isLoginUser) {
@@ -36,6 +42,28 @@ export default function ProductDesc({product}:any) {
 
     if(!color) alert('색상을 선택해주세요.');
   }
+
+  const addToCart = useCallback(() => {
+    if (color !== '') {
+      const newItem = {
+        name: product[0].name,
+        color: color,
+        price: product[0].price,
+        image: product[0].image,
+        quantity: quantity,
+      };
+
+      if (isLoginUser) {
+        // dispatch(userAddItem(newItem));
+        // alert('장바구니에 담겼습니다.');
+      } else {
+        dispatch(addItem(newItem));
+        alert('장바구니에 담겼습니다.');
+      }
+    } else {
+      alert('색상을 선택해 주세요');
+    }
+  }, [color]);
 
   return (
   <div className='productDetail__des'>
@@ -69,7 +97,7 @@ export default function ProductDesc({product}:any) {
                   <AiOutlinePlusSquare onClick={() => updateQuantity('plus')} />
             </div>
             <div className="productDetail__des__btns">
-              <BaseButton onClick={() =>console.log('카트에 담겼습니다.')}>Cart</BaseButton>
+              <BaseButton onClick={addToCart}>카트에 담기</BaseButton>
               {
                 isLoginUser && color.length ? (
                   <BaseButton>
