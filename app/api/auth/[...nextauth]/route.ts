@@ -1,9 +1,8 @@
-import { redirect } from 'next/navigation';
-import { signIn } from 'next-auth/react';
+
 import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import KakaoProvider from "next-auth/providers/kakao";
-import { NextAuthOptions } from "next-auth";
+
 
 export const authOption = {
     providers:[
