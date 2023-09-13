@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google'
 import AuthSession from '@/components/AuthSession';
 import '../scss/reset.modules.scss';
 import Footer from '@/components/footer/Footer';
+import { ReduxProvider } from '@/redux/ReduxProvider';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,15 +23,17 @@ export default function RootLayout({
     <html lang="en">
       
       <body className={inter.className}>
-        <AuthSession>
-          <>
-            <Header/>
-            <main>
-            {children}
-            </main>
-            <Footer/>
-          </>
-        </AuthSession>
+        <ReduxProvider>
+          <AuthSession>
+            <>
+              <Header/>
+              <main>
+              {children}
+              </main>
+              <Footer/>
+            </>
+          </AuthSession>
+        </ReduxProvider>
       </body>
     </html>
   )
