@@ -27,9 +27,14 @@ export default function ProductDesc({product}:any) {
   const isLoginUser = auth.currentUser || snsSession;
 
   const nonUserBtnClickHandler = () => {
-    alert('로그인을 먼저 해주세요.');
-    
-    router.replace('/login');
+    if(!isLoginUser) {
+      alert('로그인을 해주세요')
+      router.replace('/login');
+
+      return;
+    }
+
+    if(!color) alert('색상을 선택해주세요.');
   }
 
   return (
@@ -66,11 +71,11 @@ export default function ProductDesc({product}:any) {
             <div className="productDetail__des__btns">
               <BaseButton onClick={() =>console.log('카트에 담겼습니다.')}>Cart</BaseButton>
               {
-                isLoginUser ? (
+                isLoginUser && color.length ? (
                   <BaseButton>
                     <Link href={{
                     pathname:'/purchase',
-                    query:{id:product.name, color ,quantity}
+                    query:{id:product[0].name, color,quantity}
                     }}>구매하기</Link>
                   </BaseButton>    
                 ) : (
