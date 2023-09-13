@@ -5,6 +5,8 @@ import { usePathname } from 'next/navigation'
 import Link from 'next/link';
 import {AiOutlineMenu,AiOutlineClose} from 'react-icons/ai'
 import { headerNav , productNav} from '@/constant/navigation';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import {app} from '@/lib/firebaseConfig'
 
 
 import './header.scss';
@@ -14,6 +16,10 @@ export default function Header() {
   const [menuIsActive, setMenuIsActive] = useState(false) 
   const headerRef = useRef<HTMLDivElement>(null);
   const pathName = usePathname();
+  const auth = getAuth(app);
+  const user = auth.currentUser;
+
+  console.log(user)
 
   useEffect(() => {
     const shrinkHeader = () => {
