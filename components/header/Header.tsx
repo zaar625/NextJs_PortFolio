@@ -20,7 +20,7 @@ export default function Header() {
   const pathName = usePathname();
   const auth = getAuth(app);
   const firebaseUser = auth.currentUser 
-  // console.log(firebaseUser, snsSession)
+  // console.log( snsSession)
 
   useEffect(() => {
     const shrinkHeader = () => {

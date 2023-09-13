@@ -10,13 +10,14 @@ import {app} from '@/lib/firebaseConfig'
 import { useRouter } from 'next/navigation'
 import { useDispatch } from 'react-redux';
 import { addItem } from '@/redux/slice/cartItem';
+import { userAddItem } from '@/redux/slice/userCartItem';
 
 
 export default function ProductDesc({product}:any) {
   const auth = getAuth(app);
   const router = useRouter();
   const { data: snsSession } = useSession();
-  const isLoginUser = auth.currentUser || snsSession;
+  const isLoginUser = auth.currentUser?.uid || snsSession?.user?.name;
   const dispatch = useDispatch();
 
 
@@ -54,7 +55,8 @@ export default function ProductDesc({product}:any) {
       };
 
       if (isLoginUser) {
-        // dispatch(userAddItem(newItem));
+        console.log('장바구니 넣기')
+        dispatch(userAddItem({newItem,user:isLoginUser}));
         // alert('장바구니에 담겼습니다.');
       } else {
         dispatch(addItem(newItem));
