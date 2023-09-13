@@ -1753,6 +1753,27 @@
   dependencies:
     tslib "^2.4.0"
 
+"@tosspayments/payment-sdk@^1.6.5":
+  version "1.6.5"
+  resolved "https://registry.yarnpkg.com/@tosspayments/payment-sdk/-/payment-sdk-1.6.5.tgz#889ec17a88fe5c5d2c5dd0ce69a04dc0571620e5"
+  integrity sha512-IOclMBCRGDcus1FnLx2LxTZUw8i+o68/C5G1iygyxnScNKdZz9eaehDrnnywQh6UVe1QAlynohdh3fhCaKka7w==
+  dependencies:
+    "@tosspayments/payment__types" "^1.66.2"
+
+"@tosspayments/payment__types@^1.66.2":
+  version "1.66.2"
+  resolved "https://registry.yarnpkg.com/@tosspayments/payment__types/-/payment__types-1.66.2.tgz#0b4b35c997d0ffbb597d4315426e5f66e4f1c356"
+  integrity sha512-DE3nzEptEj8f3UHrUllNZANRetho6lRnhIPMhDkpm4/u7EW/WS3IeS+gwvNj5vUThTX8i7giAsdd80ZuWcQ6jg==
+  dependencies:
+    "@tosspayments/sdk-constants" "^0.2.2"
+
+"@tosspayments/sdk-constants@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@tosspayments/sdk-constants/-/sdk-constants-0.2.2.tgz#91bd84fc1543eb2382b2a9b40792eed9f9146b1e"
+  integrity sha512-qTIcD9JnVtN65/yiW5sPAlvK5fpQtDluv4IEyslubncbQLQKE+ePSnGZU1fLNPxcchv6QTnwmgj9Ndm6EN/Ymg==
+  dependencies:
+    type-fest "^2.11.2"
+
 "@trysound/sax@0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@trysound/sax/-/sax-0.2.0.tgz#cccaab758af56761eb7bf37af6f03f326dd798ad"
@@ -4246,6 +4267,11 @@ type-fest@^0.20.2:
   version "0.20.2"
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.20.2.tgz#1bf207f4b28f91583666cb5fbd327887301cd5f4"
   integrity sha512-Ne+eE4r0/iWnpAxD852z3A+N0Bt5RN//NjJwRd2VFHEmrywxf5vsZlh4R6lixl6B+wz/8d+maTSAkN1FIkI3LQ==
+
+type-fest@^2.11.2:
+  version "2.19.0"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-2.19.0.tgz#88068015bb33036a598b952e55e9311a60fd3a9b"
+  integrity sha512-RAH822pAdBgcNMAfWnCBU3CFZcfZ/i1eZjwFU/dsLKumyuuP3niueg2UAukXYF0E2AAoc82ZSSf9J0WQBinzHA==
 
 typed-array-buffer@^1.0.0:
   version "1.0.0"
