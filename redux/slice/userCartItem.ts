@@ -11,12 +11,20 @@ interface Item {
     color:string;
     price:number;
     quantity:number;
-  }
+  };
+
+
 
 const firebaseUpdate= async (user:string) => {
-  console.log('upload', user)
+  let cart;
+  const localStorageItem = localStorage.getItem('loginCartItems');
+  
+  if(localStorageItem) {
+    cart = JSON.parse(localStorageItem);
+  } else {
+    cart = [];
+  }
   const db = getFirestore(app);
-  const cart = localStorage.getItem('loginCartItems') !== null ? JSON.parse(localStorage.getItem('loginCartItems')) : []
   
   await setDoc(doc(db, "user", user),{cart});
 }
