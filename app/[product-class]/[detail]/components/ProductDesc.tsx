@@ -55,9 +55,8 @@ export default function ProductDesc({product}:any) {
       };
 
       if (isLoginUser) {
-        console.log('장바구니 넣기')
         dispatch(userAddItem({newItem,user:isLoginUser}));
-        // alert('장바구니에 담겼습니다.');
+        alert('장바구니에 담겼습니다.');
       } else {
         dispatch(addItem(newItem));
         alert('장바구니에 담겼습니다.');

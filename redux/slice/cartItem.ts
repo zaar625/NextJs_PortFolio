@@ -5,13 +5,15 @@ import { createSlice } from '@reduxjs/toolkit';
 
 // 로컬스토리지 아이템 가져오기
 const getCartList = () => {
-    const localStorageItem = localStorage.getItem('cartItems');
+  let localStorageItem;
+  
+  if (typeof window !== 'undefined')  localStorageItem = localStorage.getItem('cartItems');    
 
-    if(localStorageItem){
-        return JSON.parse(localStorageItem)
-    } else {
-        return [];
-    }
+  if(localStorageItem){
+      return JSON.parse(localStorageItem)
+  } else {
+      return [];
+  }
 }
 
 export interface Item {

@@ -2,7 +2,31 @@
 
 .cart {
     padding-top: 9rem;
+
     &__info{
+        padding:5px 2rem;
+        background-color:rgba(96, 107, 49, .1);
         
+    }
+
+    &__items {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        
+        &__card {
+            position: relative;
+            &__imgWrap{
+                position: relative;
+                padding-bottom: 150%;
+            }
+
+            &__deleteBtn {
+                position: absolute;
+                bottom:0px;
+                right: 10px;
+                cursor: pointer;
+            }
+            
+        }
     }
 }
