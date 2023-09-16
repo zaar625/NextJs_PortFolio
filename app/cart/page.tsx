@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react"
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { db } from '@/lib/firebaseConfig';
-import {getDoc,doc} from "firebase/firestore";
+import {getDoc,doc, setDoc} from "firebase/firestore";
 import './cart.scss';
 
 export type TCartItem = {
@@ -23,11 +23,9 @@ export default function CartPage() {
   const { data: snsSession } = useSession();
   const currentUser = auth.currentUser?.uid || snsSession?.user?.name;
   const nonUserCartItems = useSelector((state: RootState) => state.cartItem.items);
-  const userCartItems = useSelector((state: RootState) => state.userCartItem.items,);
-
   const [cartItem, setCartItem] = useState<TCartItem[]>();
 
-  // console.log(notUserCartItems);
+
   const getCartItem = async () => {
     if(currentUser) {
       // db
@@ -45,13 +43,18 @@ export default function CartPage() {
     } else {
       setCartItem(nonUserCartItems);
     }
-  },[currentUser,nonUserCartItems,userCartItems])
+  },[currentUser,nonUserCartItems])
 
-  const userRemoveCartItem = (chooseItem:TCartItem) => {
-    console.log(currentUser);
-    const newItemList = cartItem?.filter((prevItem) => prevItem.name !== chooseItem.name ||prevItem.color !== chooseItem.color);
-    console.log(newItemList)
+  const userRemoveCartItem = async (chooseItem:TCartItem) => {
+    const newData = cartItem?.filter((item) => chooseItem.name !== item.name || chooseItem.color !== item.color);
+    
+    if(currentUser){
+      await setDoc(doc(db, "user", currentUser),{cart:newData}).then(()=>
+      setCartItem(newData)
+      )
+    }
   }
+
   return (
     <div className='cart'>
       <div className='cart__info mb-2'>

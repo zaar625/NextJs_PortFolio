@@ -12,8 +12,16 @@ import { useDispatch } from 'react-redux';
 import { addItem } from '@/redux/slice/cartItem';
 import { userAddItem } from '@/redux/slice/userCartItem';
 import { db } from '@/lib/firebaseConfig';
-import { doc, setDoc,getFirestore  } from 'firebase/firestore';
+import { doc, setDoc,getFirestore ,collection,getDoc } from 'firebase/firestore';
 
+
+interface Item {
+  id:number;
+  name:string;
+  color:string;
+  price:number;
+  quantity:number;
+};
 
 
 export default function ProductDesc({product}:any) {
@@ -22,7 +30,6 @@ export default function ProductDesc({product}:any) {
   const { data: snsSession } = useSession();
   const isLoginUser = auth.currentUser?.uid || snsSession?.user?.name;
   const dispatch = useDispatch();
-
 
   const [color, setColor] = useState('');
   const [quantity, setQuantity] = useState(1); //수량
@@ -47,32 +54,59 @@ export default function ProductDesc({product}:any) {
     if(!color) alert('색상을 선택해주세요.');
   }
 
-  const filterItemHanlder = (newItem:) => {
+  const filterItemHanlder = (newItem:any) => {
 
   }
 
   const addToCart = useCallback(async () => {
-    if (color !== '') {
-      const newItem = {
-        name: product[0].name,
-        color: color,
-        price: product[0].price,
-        image: product[0].image,
-        quantity: quantity,
-      };
+    if(color === '') return alert('색상을 선택해 주세요');
 
-      if (isLoginUser) {
-        await setDoc(doc(db, "user", isLoginUser),{cart});
-        // dispatch(userAddItem({newItem,user:isLoginUser}));
-        alert('장바구니에 담겼습니다.');
-      } else {
-        dispatch(addItem(newItem));
-        alert('장바구니에 담겼습니다.');
+    const newItem = {
+      name: product[0].name,
+      color: color,
+      price: product[0].price,
+      image: product[0].image,
+      quantity: quantity,
+    };
+
+    if (isLoginUser) {
+      const db = getFirestore(app);
+      const docRef = doc(db, "user", isLoginUser);
+      const docSnap = await getDoc(docRef);
+      const cartData = docSnap.data();
+
+      if(cartData) {
+        const {cart:cartList} = cartData;
+        console.log(cartList)
+        const duplicate = cartList.filter((e: Item) => e.name === newItem.name && e.color === newItem.color);
+
+        if(duplicate.length > 0) {
+          const noSameProduct = cartList.filter((e:Item) => e.name !== newItem.name || e.color !== newItem.color);
+          const newData = [...noSameProduct, {
+            id: duplicate[0].id,
+            name: newItem.name,
+            image:newItem.image,
+            color: newItem.color,
+            price: newItem.price,
+            quantity: newItem.quantity + duplicate[0].quantity
+          }];
+
+          await setDoc(doc(db, "user", isLoginUser),{cart:newData});
+        } else {
+          const newData = [...cartList, {
+            ...newItem,
+            id: cartList.length > 0 ? cartList[cartList.length - 1].id + 1 : 1
+          }];
+          await setDoc(doc(db, "user", isLoginUser),{cart:newData});
+        }
       }
+      alert('장바구니에 담겼습니다.');
     } else {
-      alert('색상을 선택해 주세요');
+      dispatch(addItem(newItem));
+      alert('장바구니에 담겼습니다.');
     }
-  }, [color]);
+   
+  }, [color,quantity]);
 
   return (
   <div className='productDetail__des'>
