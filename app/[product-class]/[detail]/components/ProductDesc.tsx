@@ -11,6 +11,9 @@ import { useRouter } from 'next/navigation'
 import { useDispatch } from 'react-redux';
 import { addItem } from '@/redux/slice/cartItem';
 import { userAddItem } from '@/redux/slice/userCartItem';
+import { db } from '@/lib/firebaseConfig';
+import { doc, setDoc,getFirestore  } from 'firebase/firestore';
+
 
 
 export default function ProductDesc({product}:any) {
@@ -44,7 +47,11 @@ export default function ProductDesc({product}:any) {
     if(!color) alert('색상을 선택해주세요.');
   }
 
-  const addToCart = useCallback(() => {
+  const filterItemHanlder = (newItem:) => {
+
+  }
+
+  const addToCart = useCallback(async () => {
     if (color !== '') {
       const newItem = {
         name: product[0].name,
@@ -55,7 +62,8 @@ export default function ProductDesc({product}:any) {
       };
 
       if (isLoginUser) {
-        dispatch(userAddItem({newItem,user:isLoginUser}));
+        await setDoc(doc(db, "user", isLoginUser),{cart});
+        // dispatch(userAddItem({newItem,user:isLoginUser}));
         alert('장바구니에 담겼습니다.');
       } else {
         dispatch(addItem(newItem));

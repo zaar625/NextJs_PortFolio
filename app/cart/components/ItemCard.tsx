@@ -9,11 +9,14 @@ import { removeItem } from '@/redux/slice/cartItem';
 import { useSession } from 'next-auth/react';
 import {auth} from '@/lib/firebaseConfig'
 import { useDispatch } from 'react-redux';
-
-
 import '../cart.scss';
 
-export default function ItemCard({item}:{item:TCartItem} ) {
+type TProps = {
+  item:TCartItem,
+  userRemoveCartItem:(currItem:TCartItem) => void
+}
+
+export default function ItemCard({item,userRemoveCartItem}:TProps) {
   const dispatch = useDispatch();
   const { data: snsSession } = useSession()
   const firebaseUser = auth.currentUser 
@@ -23,7 +26,7 @@ export default function ItemCard({item}:{item:TCartItem} ) {
   const removeCartItem = () => {
     alert('해당 아이템을 삭제하시겠습니까?');
     if (isLoginUser) {
-      dispatch(userRemoveItem({item, user:isLoginUser}));
+      userRemoveCartItem(item);
     } else {
       dispatch(removeItem(item));
     }

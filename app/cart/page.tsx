@@ -46,6 +46,12 @@ export default function CartPage() {
       setCartItem(nonUserCartItems);
     }
   },[currentUser,nonUserCartItems,userCartItems])
+
+  const userRemoveCartItem = (chooseItem:TCartItem) => {
+    console.log(currentUser);
+    const newItemList = cartItem?.filter((prevItem) => prevItem.name !== chooseItem.name ||prevItem.color !== chooseItem.color);
+    console.log(newItemList)
+  }
   return (
     <div className='cart'>
       <div className='cart__info mb-2'>
@@ -53,7 +59,7 @@ export default function CartPage() {
       </div>
       <div className='cart__items'>
         {
-          cartItem && cartItem.map((item,index) => <ItemCard item={item} key={item.id}/>)
+          cartItem && cartItem.map((item,index) => <ItemCard item={item} key={item.id} userRemoveCartItem={userRemoveCartItem}/>)
         }
         
       </div>
