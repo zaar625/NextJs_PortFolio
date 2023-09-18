@@ -12,7 +12,7 @@ import { useDispatch } from 'react-redux';
 import { addItem } from '@/redux/slice/cartItem';
 import { userAddItem } from '@/redux/slice/userCartItem';
 import { db } from '@/lib/firebaseConfig';
-import { doc, setDoc,getFirestore ,collection,getDoc } from 'firebase/firestore';
+import { doc, setDoc,getFirestore ,collection,getDoc ,addDoc} from 'firebase/firestore';
 
 
 interface Item {
@@ -70,14 +70,14 @@ export default function ProductDesc({product}:any) {
     };
 
     if (isLoginUser) {
+      console.log('isLoginUser',isLoginUser)
       const db = getFirestore(app);
       const docRef = doc(db, "user", isLoginUser);
       const docSnap = await getDoc(docRef);
-      const cartData = docSnap.data();
-
+      const cartData = docSnap.data(); //1. 유저가 없을경우 undefined 반환, 2. 있을경우 {} 로 반환됩니다. 
+      
       if(cartData) {
         const {cart:cartList} = cartData;
-        console.log(cartList)
         const duplicate = cartList.filter((e: Item) => e.name === newItem.name && e.color === newItem.color);
 
         if(duplicate.length > 0) {
@@ -99,8 +99,10 @@ export default function ProductDesc({product}:any) {
           }];
           await setDoc(doc(db, "user", isLoginUser),{cart:newData});
         }
+      } else {
+        await setDoc(doc(db, "user", isLoginUser),{cart:[{...newItem, id:0}]}).then(()=>alert('장바구니에 담겼습니다.'));
       }
-      alert('장바구니에 담겼습니다.');
+      // alert('장바구니에 담겼습니다.');
     } else {
       dispatch(addItem(newItem));
       alert('장바구니에 담겼습니다.');
