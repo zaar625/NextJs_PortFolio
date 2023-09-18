@@ -9,7 +9,7 @@ import Link from 'next/link';
 export default async function ProductiDetailPage({params}:{params:any}) {
 
   const searchTerm = decodeURIComponent(params.detail);
-  console.log('params',params)
+  
   const db = getFirestore(app);
   const docRef = collection(db, "products");
   const q = query(docRef, where('name', '==',`${searchTerm}`));

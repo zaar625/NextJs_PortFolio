@@ -7,12 +7,17 @@ import {AiOutlineClose} from 'react-icons/ai'
 import { useSession } from 'next-auth/react';
 import {auth} from '@/lib/firebaseConfig'
 import { db } from '@/lib/firebaseConfig';
-import { doc, addDoc, collection} from "firebase/firestore"; 
+import {addDoc, collection} from "firebase/firestore"; 
 
 import './review.scss';
-import { update } from 'firebase/database';
 
-export default function ProductReviewPage() {
+type TParams = {
+  class:string,
+  detail:string
+}
+
+export default function ProductReviewPage({params}:{params:TParams}) {
+  const productName = decodeURIComponent(params.detail);
   const [images, setImages] = useState<FileList[]>([]);
   const { data: snsSession } = useSession();
   const user = auth.currentUser?.uid || snsSession?.user?.name;
@@ -44,13 +49,11 @@ export default function ProductReviewPage() {
     const photosURLs: string[] = [];
     await Promise.all(
       images.map(async (image, index) => {
-        const storageRef =  ref(storage,`review/${image[0].name}`);
+        const storageRef =  ref(storage,`review/${params.class}/${image[0].name}`);
         await uploadBytes(storageRef, image[0]).then((snapshot) => {
           
         });
-        const url = await getDownloadURL(ref(storage,`review/${image[0].name}`))
-        console.log(url)
-
+        const url = await getDownloadURL(ref(storage,`review/${params.class}/${image[0].name}`))
         photosURLs.push(url);
       })
     );
@@ -60,7 +63,9 @@ export default function ProductReviewPage() {
         date:new Date(),
         images:photosURLs,
         tilte: formInput.title,
-        content:formInput.content
+        content:formInput.content,
+        author:user,
+        product:productName
       }
       await addDoc(collection(db, "review"),reviewData).then(()=> alert('리뷰 작성이 완료되었습니다.'));
     }
