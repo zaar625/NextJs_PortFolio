@@ -53,10 +53,6 @@ export default function Header() {
       alert('로그아웃되었습니다.');
       window.location.replace('/');
     }
-
-   
-    
-
   }
 
   return (
@@ -71,7 +67,6 @@ export default function Header() {
           <button className='menu' onClick={()=>setMenuIsActive(!menuIsActive) }>
           {menuIsActive ? <AiOutlineClose/> : <AiOutlineMenu/> }   
           </button>
-          
           <ul className='header__nav-right'>
           <li>
             {firebaseUser || snsSession ? <button onClick={logout}>logout</button> : <Link href={'/login'}>login</Link>}
@@ -91,7 +86,7 @@ export default function Header() {
               {productNav.map((link, index) => {
               return (
                 <li key={index}>
-                  <Link href={'/'} key={link.display}>{link.display}</Link>
+                  <Link href={`/${link.display}`} key={link.display}>{link.display}</Link>
                 </li>
               )
             })}

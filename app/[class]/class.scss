@@ -1,0 +1,16 @@
+@use '@/app/globals.scss' as * ;
+
+.product-class {
+    padding: 9rem 2rem 0;
+
+    & > h1{
+        font-size: 1rem;
+        font-weight: 'bold';
+        text-align: center;
+    }
+
+    &__itemWrap {
+        @include flex(unset, unset);
+        gap:1rem;
+    }
+}

@@ -8,18 +8,23 @@ import { DocumentData } from 'firebase/firestore';
 import { loadTossPayments } from '@tosspayments/payment-sdk';
 import ProductInfo from './components/ProductInfo';
 import BaseButton from '@/components/buttons/BaseButton';
-
+import { useSession } from 'next-auth/react';
 import { TInputValue } from './components/DeliveryFrom';
+import {auth} from '@/lib/firebaseConfig'
 
 
 import DeliveryFrom from './components/DeliveryFrom';
 import './purchase.scss';
 
-export default function Purchase() {
+export default function PurchasePage() {
   const searchParams = useSearchParams();
   const searchId = searchParams.get('id');
   const searchColor = searchParams.get('color');
   const searchQuantity= searchParams.get('quantity');
+
+  const { data: snsSession } = useSession();
+  const user = auth.currentUser?.uid || snsSession?.user?.name;
+  
 
   const [product, setProduct] = useState<DocumentData[]>();
 
@@ -78,7 +83,7 @@ export default function Purchase() {
         amount:product[0].price * Number(searchQuantity),
         orderId:Math.random().toString(36).slice(2),
         orderName:product[0].name,
-        successUrl:`${window.location.origin}/toss/success`,
+        successUrl:`${window.location.origin}/purchase/success?user=${user}`,
         failUrl:`${window.location.origin}/api/payment/fail`
       })
     }
