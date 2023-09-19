@@ -17,7 +17,6 @@ export default function DeliveryFrom({inputValues,setInputValue}:Tprops) {
   const open = useDaumPostcodePopup('https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js');
 
   const searchAdressComplete = (data:any) => {
-    console.log(data)
     const {address,zonecode } = data;
     setInputValue({
       ...inputValues,

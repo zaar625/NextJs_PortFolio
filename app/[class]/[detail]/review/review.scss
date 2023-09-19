@@ -84,3 +84,50 @@
         transition: all 0.2s ease;
     }
 }
+
+.review-card {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    &__item {
+        padding:1rem;
+
+        &__header-container {
+            @include flex(center, space-between);
+            & p {
+                font-size: 0.825rem;
+            }
+        }
+
+        &__product-info {
+            @include flex(unset, unset);
+            gap:10px;
+
+            &__imageWrap {
+                max-width: 80px;
+
+                & > img {
+                    border-radius: 10px;
+                    width: 100%;
+                    height: auto;
+                }
+            }
+
+            &__infoWrap {
+                
+                & > p:first-child {
+                    font-weight: bold;
+                    font-size: 12px;
+                }
+            }
+        }
+        &__userImage{
+            width:100%;
+            & > li {
+                position: relative;
+                width: 80px;
+                height: 80px;
+            }
+        }
+    }
+}

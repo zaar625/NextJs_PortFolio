@@ -70,7 +70,7 @@ export default function ProductDesc({product}:any) {
     };
 
     if (isLoginUser) {
-      console.log('isLoginUser',isLoginUser)
+  
       const db = getFirestore(app);
       const docRef = doc(db, "user", isLoginUser);
       const docSnap = await getDoc(docRef);

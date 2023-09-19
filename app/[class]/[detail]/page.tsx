@@ -4,17 +4,19 @@ import ProductSlide from './components/ProductSlide';
 import { collection,getFirestore ,query, where, getDocs} from "firebase/firestore";
 import {app} from '../../../lib/firebaseConfig'
 import ProductDesc from './components/ProductDesc';
+import Review from './components/ReviewCard';
 import Link from 'next/link';
 
 export default async function ProductiDetailPage({params}:{params:any}) {
 
-  const searchTerm = decodeURIComponent(params.detail);
+  const productName = decodeURIComponent(params.detail);
   
   const db = getFirestore(app);
   const docRef = collection(db, "products");
-  const q = query(docRef, where('name', '==',`${searchTerm}`));
+  const q = query(docRef, where('name', '==',`${productName}`));
   const querySnapshot = (await getDocs(q)).docs;
   const product = querySnapshot.map((item) => item.data());
+  
  
   return (
   <section className=" container section">
@@ -33,7 +35,10 @@ export default async function ProductiDetailPage({params}:{params:any}) {
       <ProductSlide product={product}/>
       <ProductDesc product={product}/>
     </div>
-    <Link href={`/${params.class}/${params.detail}/review`}>글 작성하기</Link>
+    <div>
+      <Link href={`/${params.class}/${params.detail}/review`}>글 작성하기</Link>
+      <Review productName={productName} productInfo={product[0]}/>
+    </div>
   </section>
   )
 }
