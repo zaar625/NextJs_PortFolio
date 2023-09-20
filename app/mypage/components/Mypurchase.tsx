@@ -1,17 +1,10 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { useSession } from 'next-auth/react';
-import {auth} from '@/lib/firebaseConfig';
 import { db } from '@/lib/firebaseConfig';
 import { collection ,query, where, getDocs, DocumentData} from 'firebase/firestore';
 
-
-
-
-export default function Mypurchase() {
-  const { data: snsSession } = useSession();
-  const user = auth.currentUser?.uid || snsSession?.user?.name;
+export default function Mypurchase({user}:{user:string | null}) {
   const [purchaseItem, setPurchaseItem] = useState<DocumentData[]>();
 
   async function getUserPurchaseItem(){
@@ -24,7 +17,7 @@ export default function Mypurchase() {
     setPurchaseItem(purchases);
   };
 
-  console.log(purchaseItem)
+  // console.log(purchaseItem)
   useEffect(()=>{
     getUserPurchaseItem();
   },[])
