@@ -3,6 +3,7 @@
 import React, {useEffect, useState} from 'react'
 import { collection,query,where,getDocs,DocumentData,deleteDoc,doc } from 'firebase/firestore';
 import { db } from '@/lib/firebaseConfig';
+import Link from 'next/link';
 
 export default function MyReview({user}:{user:string | null}) {
     const [reviewData, setReviewData] = useState<DocumentData[]>()
@@ -32,18 +33,26 @@ export default function MyReview({user}:{user:string | null}) {
         getMyReview();
       }
     }
-
-      // console.log('reviewData',reviewData)
+  
+    console.log(reviewData)
   return (
     <div>
         {
            reviewData && reviewData.map((reviewItem, index) => (
-            <>
-                <div key={index}>{reviewItem.title}</div>
-                <button onClick={() => deletReview(reviewItem.id)}>삭세</button>
+            <div key={index}>
+                <div>{reviewItem.title}</div>
+                <button onClick={() => deletReview(reviewItem.id)}>삭제</button>
                 <br/>
-                <button>수정</button>
-            </>
+                <Link href={{
+                    pathname:'/mypage/editReview',
+                    query:{
+                      id:reviewItem.id, //문서 아이디
+                      content:reviewItem.content,
+                      title:reviewItem.title,
+                      class:reviewItem.class,
+                    }
+                    }}>수정</Link>
+            </div>
            )) 
         }
     </div>

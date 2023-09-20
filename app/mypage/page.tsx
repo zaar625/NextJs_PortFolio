@@ -10,7 +10,7 @@ import {auth} from '@/lib/firebaseConfig';
 export default function Mypage() {
   const { data: snsSession } = useSession();
   const user = auth.currentUser?.uid || snsSession?.user?.name;
-  console.log('mypage',user)
+
   return (
     <div className='mypage'>
         <Mypurchase user={user ? user : null}/>

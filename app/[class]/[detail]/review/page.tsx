@@ -65,7 +65,8 @@ export default function ProductReviewPage({params}:{params:TParams}) {
         title: formInput.title,
         content:formInput.content,
         author:user,
-        product:productName
+        product:productName,
+        class:params.class,
       }
       const docRef = doc(collection(db,"review"));
       const refId = docRef.id;
