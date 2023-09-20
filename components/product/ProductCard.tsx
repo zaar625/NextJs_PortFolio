@@ -1,12 +1,35 @@
-import './product-card.scss';
+'use client'
 
-import React from 'react';
+import React,{ReactHTMLElement, useState} from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import numberWithCommas from '@/util/numberWithCommas';
+import LikeIcon from '/public/icon/like.svg'
+import './product-card.scss';
 
 export default function ProductCard({data}:any) {
-  
+  const [like, setlike] = useState(false);
+  const [timer, setTimer] = useState(0); 
+
+  const likeOnClickEvent = (e:React.MouseEvent<HTMLButtonElement>) => {
+    setlike(!like);
+    
+    if (timer) {
+      console.log('clear timer');
+      clearTimeout(timer);
+    }
+    
+    const newTimer = window.setTimeout(async () => {
+      try {
+        console.log('DB에 저장됩니다.')
+      } catch (e) {
+        console.error('error', e);
+      }
+    }, 800);
+    
+    setTimer(newTimer);
+  }
+
   return (
     <>
       <Link href={`/${data.class}/${data.name}`}>
@@ -27,6 +50,9 @@ export default function ProductCard({data}:any) {
         </div>
         <p className='product-card__name'>{data.name}</p>
       </Link>
+      <button type='button' onClick={likeOnClickEvent}>
+        <LikeIcon width={18} height={18} color={like ? '#FF2F54' : 'transparent'}/>
+      </button>
     </>
   )
 }
