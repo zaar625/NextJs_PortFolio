@@ -15,7 +15,6 @@ async function getReviewData(q:string) {
 export default async function Review({productName,productInfo}:{productName:string,productInfo:any}) {
   const data = await getReviewData(productName)
 
-  // console.log(data)
   return (
     <div className='review-card'>
       {
@@ -27,7 +26,6 @@ export default async function Review({productName,productInfo}:{productName:stri
 }
 
 function ReviewItem({reviewData,productInfo}:any) {
-  console.log(reviewData)
   
   return (
     <div className='review-card__item'>

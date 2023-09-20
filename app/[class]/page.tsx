@@ -13,7 +13,6 @@ async function getProductClass(q:string) {
 
 export default async function ProductClassPage({params}:{params:{class:string}}) {
   const data = await getProductClass(params.class);
-  console.log(data);
 
   return (
     <div className='product-class container'>

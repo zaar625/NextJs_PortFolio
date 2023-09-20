@@ -9,7 +9,7 @@ import { db } from '@/lib/firebaseConfig';
 import '@/app/[class]/[detail]/review/review.scss';
 
 export default function EditReviewPage({searchParams}:any) {
-    // console.log(searchParams)
+
     const imageInputRef = useRef<HTMLInputElement | null>(null);
     const [images, setImages] = useState<FileList[]>([]);
     const [formInput, setFormInput] = useState({
@@ -36,8 +36,6 @@ export default function EditReviewPage({searchParams}:any) {
       const files = e.target.files as FileList; // 선택된 파일 목록을 가져옵니다.
       setImages([...images,files])
     }
-    console.log(formInput);
-    console.log(images)
 
     const reviewUpLoad = async() => {
     

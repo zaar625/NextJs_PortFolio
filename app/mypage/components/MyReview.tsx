@@ -9,7 +9,6 @@ export default function MyReview({user}:{user:string | null}) {
     const [reviewData, setReviewData] = useState<DocumentData[]>()
 
     async function getMyReview(){
-      console.log('getMyReview',user)
       const docRef = collection(db, "review");
       const q = query(docRef, where('author', '==',`${user}`));
       const querySnapshot = (await getDocs(q)).docs;
@@ -33,8 +32,7 @@ export default function MyReview({user}:{user:string | null}) {
         getMyReview();
       }
     }
-  
-    console.log(reviewData)
+
   return (
     <div>
         {

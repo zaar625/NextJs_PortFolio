@@ -1,27 +1,33 @@
 'use client'
 
-import React,{ReactHTMLElement, useState} from 'react';
+import React,{useState} from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import numberWithCommas from '@/util/numberWithCommas';
 import LikeIcon from '/public/icon/like.svg'
+import { doc, setDoc } from "firebase/firestore"; 
+import { db } from '@/lib/firebaseConfig';
+import { useSession } from 'next-auth/react';
+import {auth} from '@/lib/firebaseConfig'
 import './product-card.scss';
 
 export default function ProductCard({data}:any) {
+  const { data: snsSession } = useSession();
+  const user = auth.currentUser?.uid || snsSession?.user?.name;
   const [like, setlike] = useState(false);
   const [timer, setTimer] = useState(0); 
 
+  // 좋아요 디바운스 클릭 이벤트입니다. _ 추후 추가 기능
   const likeOnClickEvent = (e:React.MouseEvent<HTMLButtonElement>) => {
     setlike(!like);
     
     if (timer) {
-      console.log('clear timer');
       clearTimeout(timer);
     }
     
     const newTimer = window.setTimeout(async () => {
       try {
-        console.log('DB에 저장됩니다.')
+      //데이터베이스 로직 추가
       } catch (e) {
         console.error('error', e);
       }
@@ -50,9 +56,9 @@ export default function ProductCard({data}:any) {
         </div>
         <p className='product-card__name'>{data.name}</p>
       </Link>
-      <button type='button' onClick={likeOnClickEvent}>
+      {/* <button type='button' onClick={likeOnClickEvent}>
         <LikeIcon width={18} height={18} color={like ? '#FF2F54' : 'transparent'}/>
-      </button>
+      </button> */}
     </>
   )
 }

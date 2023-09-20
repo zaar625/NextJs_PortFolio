@@ -28,8 +28,6 @@ export default function LoginPage() {
     signInWithEmailAndPassword(auth, credential.email, credential.password)
     .then((userCredential) => {
       router.push('/');
-      console.log('로그인완료');
-
     })
     .catch((error) => {
       const errorCode = error.code;
