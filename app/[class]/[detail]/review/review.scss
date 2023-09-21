@@ -89,13 +89,25 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 
+    @include mobile {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media only screen and (max-width: 375px) {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
     &__item {
+        border: solid 1px #c1c1c1;
         padding:1rem;
+        border-radius: 10px;
 
         &__header-container {
             @include flex(center, space-between);
+
             & p {
                 font-size: 0.825rem;
+                color: #535353
             }
         }
 
@@ -112,15 +124,23 @@
                     height: auto;
                 }
             }
+            
 
             &__infoWrap {
                 
-                & > p:first-child {
-                    font-weight: bold;
-                    font-size: 12px;
+                & > p{
+                    font-weight: 500;
+                    font-size: $font-nomal
                 }
             }
         }
+
+        &__contents{
+            & > p {
+                font-size: $font-nomal;
+            }
+        }
+
         &__userImage{
             width:100%;
             & > li {

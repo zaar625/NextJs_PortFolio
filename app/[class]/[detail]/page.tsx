@@ -5,9 +5,9 @@ import { collection,getFirestore ,query, where, getDocs} from "firebase/firestor
 import {app} from '../../../lib/firebaseConfig'
 import ProductDesc from './components/ProductDesc';
 import Review from './components/ReviewCard';
-import Link from 'next/link';
+import { Metadata, ResolvingMetadata } from 'next';
 
-export default async function ProductiDetailPage({params}:{params:any}) {
+export async function generateMetadata ({params, searchParams}:any, parent:ResolvingMetadata):Promise<Metadata>{
 
   const productName = decodeURIComponent(params.detail);
   
@@ -16,12 +16,31 @@ export default async function ProductiDetailPage({params}:{params:any}) {
   const q = query(docRef, where('name', '==',`${productName}`));
   const querySnapshot = (await getDocs(q)).docs;
   const product = querySnapshot.map((item) => item.data());
+
+  const previousImages = (await parent).openGraph?.images || []
+  return {
+    title:product[0].name,
+    openGraph: {
+      images: [product[0].image, ...previousImages],
+    },
+  }
+}
+
+export default async function ProductiDetailPage({params}:any) {
+  const productName = decodeURIComponent(params.detail);
   
- 
+  const db = getFirestore(app);
+  const docRef = collection(db, "products");
+  const q = query(docRef, where('name', '==',`${productName}`));
+  const querySnapshot = (await getDocs(q)).docs;
+  const product = querySnapshot.map((item) => item.data());
+  
+//  console.log(product)
   return (
-  <section className=" container section">
-    <div className='productDetail'>
-      <div className='productDetail__info'>
+  <section className="container section">
+    {/* 상품 정보 */}
+    <figure className='productDetail mb-4'>
+      <figcaption className='productDetail__info'>
         <div className="productDetail__info__container">
           <p>소재, 세탁 방법 및 원산지</p>
           <p>JOIN LIFE</p>
@@ -31,14 +50,15 @@ export default async function ProductiDetailPage({params}:{params:any}) {
             제조되는 제품에 Join Lite라는 이름의 태그를 부착합니다.
           </p>
         </div>
-      </div>
+      </figcaption>
       <ProductSlide product={product}/>
       <ProductDesc product={product}/>
-    </div>
-    <div>
-      <Link href={`/${params.class}/${params.detail}/review`}>글 작성하기</Link>
-      <Review productName={productName} productInfo={product[0]}/>
-    </div>
+    </figure>
+    {/* 리뷰 */}
+    {/* <div className='productDetail__wirteBtn'>
+      <Link href={`/${params.class}/${params.detail}/review`}>리뷰 작성하기</Link>
+    </div> */}
+    <Review productName={productName} productInfo={product[0]}/>
   </section>
   )
 }

@@ -114,11 +114,11 @@ export default function ProductDesc({product}:any) {
   <div className='productDetail__des'>
       <div className="productDetail__des__container">
             <h1>{product[0].name}</h1>
-            <p>
+            <figcaption>
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum has been the industrys standard dummy text
               ever since the 1500s,
-            </p>
+            </figcaption>
             <p>색상을 선택해 주세요.</p>
             <div className="productDetail__des__container__color">
               {product[0].color.map((e:string, i:number) => (
@@ -156,7 +156,7 @@ export default function ProductDesc({product}:any) {
                 )
               }           
             </div>
-          </div>
+      </div>
   </div>
   )
 }

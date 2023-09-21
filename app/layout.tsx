@@ -19,6 +19,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+
+
   return (
     <html lang="en">
       
@@ -27,7 +29,7 @@ export default function RootLayout({
             <ReduxProvider>
               <>
                 <Header/>
-                <main>
+                <main style={{ minHeight: 'calc(100vh - 9rem)' }}>
                 {children}
                 </main>
                 <Footer/>
