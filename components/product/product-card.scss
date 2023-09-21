@@ -28,6 +28,7 @@
         &__title {
             font-weight: bold;
             text-align: center;
+            font-size: 0.825rem;
         }
         &__color {
             display: flex;
@@ -57,10 +58,12 @@
     }
     &:hover &__hover{
         opacity:1;
+
     }
 
     &__name {
-        text-align: center
+        text-align: center;
+        font-size: 0.825rem
     }
 }
 

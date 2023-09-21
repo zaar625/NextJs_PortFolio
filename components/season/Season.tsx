@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 export default function Season() {
   return (
-    <section className="season mb-4">
+    <section className="season">
         <div className="season__left"></div>
         <div className="season__right">
         <h1>changing the ideal of beauty</h1>

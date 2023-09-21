@@ -64,7 +64,7 @@ export default function Header() {
               BABAN
             </Link>
           </p>
-          <button className='menu' onClick={()=>setMenuIsActive(!menuIsActive) }>
+          <button type ='button' className='menu' onClick={()=>setMenuIsActive(!menuIsActive)}>
           {menuIsActive ? <AiOutlineClose/> : <AiOutlineMenu/> }   
           </button>
           <ul className='header__nav-right'>

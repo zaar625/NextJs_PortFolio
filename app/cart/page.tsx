@@ -64,7 +64,6 @@ export default function CartPage() {
         {
           cartItem && cartItem.map((item,index) => <ItemCard item={item} key={item.id} userRemoveCartItem={userRemoveCartItem}/>)
         }
-        
       </div>
     </div>
   )

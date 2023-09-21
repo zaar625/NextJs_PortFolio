@@ -1,6 +1,7 @@
 @use '@/app/globals.scss' as *;
 
 .season {
+    margin-bottom: 5rem;
     @include flex(unset, unset);
     gap: 2rem;
     

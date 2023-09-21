@@ -9,6 +9,10 @@
     z-index:99;
     transition: height 0.3s ease, background-color 0.3s ease;
 
+     @media only screen and (max-width: 375px) {
+            height: 6rem;
+        }
+
     &.shrink{
         height: $header-shrink-height;
         background-color: #FFF;
@@ -78,8 +82,8 @@
         li {
             padding: 5px 0;
             position: relative;
-            font-size: 0.8rem;
-            font-weight: 400;
+            font-size: 0.825rem;
+            font-weight: 500;
 
             &::after {
                 content:'';
@@ -115,11 +119,19 @@
 
 .product-nav {
     @include flex(unset, unset);
+    position: absolute;
+    bottom: 0;
     padding: 0 2rem;
     gap:1rem;
     flex-wrap: wrap;
 
     & > li{
         font-size: 0.8rem;
+        font-weight: 600;
+        color: #505050
     }
+
+    @media only screen and (max-width: 375px) {
+            bottom:-100%;
+        }
 }
