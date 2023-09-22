@@ -25,8 +25,8 @@ export default function Header() {
     const shrinkHeader = () => {
       if (headerRef !== null) {
         if (
-          document.body.scrollTop > 100 ||
-          document.documentElement.scrollTop > 100
+          document.body.scrollTop > 50 ||
+          document.documentElement.scrollTop > 50
         ) {
           headerRef.current?.classList.add('shrink');
         } else {

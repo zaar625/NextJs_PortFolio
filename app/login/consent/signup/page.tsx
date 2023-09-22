@@ -66,8 +66,8 @@ export default function SignUpPage() {
   }
 
   return (
-    <div className='signUp'>
-      <h1>회원가입</h1>
+    <section className='signUp'>
+      <h1 className='mb-4'>가입하기</h1>
       <form className='signUp__form' onSubmit={signUp}>
         <div className='signUp__email'>
           <label className='signUp__form__label'>이메일</label>
@@ -86,6 +86,6 @@ export default function SignUpPage() {
         </div>
         <button className='signUp__button' type="submit">회원가입</button>
       </form>
-    </div>
+    </section>
   )
 }

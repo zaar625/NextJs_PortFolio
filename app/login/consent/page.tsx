@@ -1,6 +1,6 @@
 'use client'
 
-import './page.scss';
+import './consent.scss';
 import React, { useState, useRef, useEffect } from 'react'
 
 import Check_CircleIcon from '/public/icon/check_circle.svg';
@@ -72,6 +72,7 @@ export default function ConsentPage() {
 
   const eachCheckedHandler = (e:React.ChangeEvent<HTMLInputElement>, checkIndex:number) => {
     const isChecked = e.target.checked;
+
     const newConsent = terms.map((item, index) => {
       if(index === checkIndex){
         return {...item, checked :isChecked };
@@ -85,13 +86,14 @@ export default function ConsentPage() {
 
   const nextBtnHandler = (e:React.MouseEvent) => {
     e.preventDefault();
+
     alert('필수항목을 체크해주세요.')
   }
 
   return (
     <div className='consent'>
-      <h3 className='mb-2'>환영합니다!<br/>BABAN에 가입하시려면<br/>약관에 동의해 주세요.
-      </h3>
+      <h2 className='mb-2'>환영합니다!<br/>BABAN에 가입하시려면<br/>약관에 동의해 주세요.
+      </h2>
       <form>
         <div className='icon-wrapper'>
           <Check_CircleIcon width={20} height={20} color={allIsChecked ? '#3879F6' : '#B8B9BC'}/>
@@ -100,7 +102,7 @@ export default function ConsentPage() {
             약관 전체 동의하기(선택 동의 포함)
           </label>
         </div>
-        <ul>
+        <ul className='mb-4'>
           {
             terms.map((term, index)=> (
               <li className='icon-wrapper' key={index}>
@@ -115,10 +117,10 @@ export default function ConsentPage() {
         </ul>
         {isRequierChecked ? (
           <Link href={'/login/consent/signup'}>
-            <button className='consent__next-button'>다음</button>
+            <button type='button' className='consent__next-button'>다음</button>
           </Link>
         ) : (
-            <button className='consent__next-button' onClick={nextBtnHandler}>다음</button>
+            <button type='button'className='consent__next-button' onClick={nextBtnHandler}>다음</button>
         )}
       </form>
     </div>

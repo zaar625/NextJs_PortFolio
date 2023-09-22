@@ -20,6 +20,7 @@ export async function generateMetadata ({params, searchParams}:any, parent:Resol
   const previousImages = (await parent).openGraph?.images || []
   return {
     title:product[0].name,
+    description:product[0].name,
     openGraph: {
       images: [product[0].image, ...previousImages],
     },
@@ -35,7 +36,7 @@ export default async function ProductiDetailPage({params}:any) {
   const querySnapshot = (await getDocs(q)).docs;
   const product = querySnapshot.map((item) => item.data());
   
-//  console.log(product)
+
   return (
   <section className="container section">
     {/* 상품 정보 */}

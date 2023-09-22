@@ -25,6 +25,12 @@ export default function LoginPage() {
 
   const login = (e) => {
     e.preventDefault();
+
+    if(!credential.email || !credential.password) {
+      alert('로그인 정보를 입력해주세요.');
+      return
+    }
+    
     signInWithEmailAndPassword(auth, credential.email, credential.password)
     .then((userCredential) => {
       router.push('/');
@@ -40,7 +46,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className='login'>
+    <section className='login'>
         <form className='login__form' onSubmit={login}>
             <h1>로그인을 해주세요.</h1>
             <div className='login__email'>
@@ -66,6 +72,6 @@ export default function LoginPage() {
           </div>
         </div>
 
-    </div>
+    </section>
   )
 }

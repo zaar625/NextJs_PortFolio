@@ -14,11 +14,11 @@
 
     &__next-button{
         width: 100%;
-        background-color: $primary;
+        border: solid 1px $primary;
         border-radius: 10px;
         text-align: center;
-        height: 44px;
-        color:#FFF;
+        height: 40px;
+        font-weight: bold;
         cursor: pointer;
     }
 }
@@ -31,6 +31,10 @@
         height: 20px;
         opacity: 0;
         position: absolute;
+    }
+
+    & > svg {
+        margin-right: 10px;
     }
 
     margin-bottom: 10px;
