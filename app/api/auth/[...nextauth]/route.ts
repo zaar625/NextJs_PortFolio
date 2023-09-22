@@ -4,7 +4,7 @@ import GoogleProvider from "next-auth/providers/google"
 import KakaoProvider from "next-auth/providers/kakao";
 
 
-export const authOption = {
+const authOption = {
     providers:[
         GoogleProvider({
             clientId:process.env.GOOGLE_CLIENT_ID as string,

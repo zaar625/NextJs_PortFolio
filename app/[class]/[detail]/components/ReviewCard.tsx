@@ -18,7 +18,7 @@ export default async function Review({productName,productInfo}:{productName:stri
   return (
     <div className='review-card'>
       {
-        data.map((item) => <ReviewItem reviewData={item} productInfo={productInfo}/>)
+        data.map((item, index) => <ReviewItem key={index} reviewData={item} productInfo={productInfo}/>)
       }
       
     </div>
@@ -53,8 +53,8 @@ function ReviewItem({reviewData,productInfo}:any) {
       </div>
       {/* 이미지 */}
       <ul className='review-card__item__userImage'>
-        {reviewData.images && reviewData.images.map((image:string)=>
-          <li>
+        {reviewData.images && reviewData.images.map((image:string ,index:number)=>
+          <li key={index}>
             <Image src={image} alt='나의 사진' fill style={{objectFit:'contain'}} sizes='100vw'/>
           </li>
         )}

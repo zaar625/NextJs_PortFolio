@@ -32,5 +32,8 @@
     "sass": "^1.66.1",
     "swiper": "^10.2.0",
     "typescript": "5.2.2"
+  },
+  "devDependencies": {
+    "encoding": "^0.1.13"
   }
 }

@@ -1,7 +1,7 @@
 import React from 'react'
-import BaseButton from '../buttons/BaseButton'
-import './season.scss'
-import Image from 'next/image'
+import BaseButton from '../buttons/BaseButton';
+import './season.scss';
+import Image from 'next/image';
 
 export default function Season() {
   return (

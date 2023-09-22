@@ -26,8 +26,8 @@ export default async function Trend() {
       </div>
       <div className='products-container'>
         {
-          data.map((product) => (
-            <ProductCard data={product}/> 
+          data.map((product, index) => (
+            <ProductCard data={product} key={index}/> 
           ))
         }
       </div>

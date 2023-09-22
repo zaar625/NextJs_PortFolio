@@ -18,7 +18,7 @@ export default async function ProductClassPage({params}:{params:{class:string}})
     <div className='product-class container'>
       <h1 className='mb-2'>{params.class}</h1>
       <div className='product-class__itemWrap'>
-        {data && data.map((item) => <ProductCard data={item}/>)}
+        {data && data.map((item, index) => <ProductCard data={item} key={index}/>)}
       </div>
     </div>
   )

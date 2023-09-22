@@ -35,12 +35,12 @@ const data = products.slice(0,5);
       </div>
       <div className='new-arrival__des-box'>
         <h3>CHANGING THE <span>IDEAL</span> OF BEAUTY</h3>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five </p>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five </p>
       </div>
       <div className='products-container'>
         {
-          data.map((product) => (
-            <ProductCard data={product}/> 
+          data.map((product, index) => (
+            <ProductCard data={product} key={index}/> 
           ))
         }
       </div>
