@@ -2,4 +2,18 @@
 
 .success {
     padding-top: 9rem;
+    @include flex(center, unset);
+    flex-direction: column;
+
+    & > a {
+        border: solid 1px $primary;
+        padding: 5px 10px;
+        border-radius: 10px;
+
+        &:hover {
+            color: #FFF;
+            background-color: $primary;
+            transition: all 0.2s ease;
+        }
+    }
 }

@@ -8,6 +8,7 @@ import { headerNav , productNav} from '@/constant/navigation';
 import { getAuth } from "firebase/auth";
 import {app} from '@/lib/firebaseConfig';
 import { useSession,signOut } from "next-auth/react"
+import {auth} from '@/lib/firebaseConfig'
 
 import './header.scss';
 
@@ -15,11 +16,13 @@ import './header.scss';
 export default function Header() {
   const [menuIsActive, setMenuIsActive] = useState(false) 
   const { data: snsSession } = useSession()
+  const firebaseUser = auth.currentUser ;
   
   const headerRef = useRef<HTMLDivElement>(null);
   const pathName = usePathname();
-  const auth = getAuth(app);
-  const firebaseUser = auth.currentUser 
+  
+
+  const isUser = firebaseUser || snsSession
 
   useEffect(() => {
     const shrinkHeader = () => {

@@ -57,15 +57,17 @@ export default async function SuccessPage({searchParams}:{searchParams:TSearchPa
     savePurchaseItemDB(payment,searchParams.user);
 
   return (
-    <div className='success'>
-        <h1>결제가 완료되었습니다.</h1>
-        <p>주문: {payment.orderName}</p>
-        <p>결제 수단: {payment.method}</p>
-        <p>결제 금액: {payment.totalAmount.toLocaleString()}원</p>
-        <p>
-            결제 일시: {format(new Date(payment.approvedAt), "yyyy/MM/dd HH:mm:ss")}
-        </p>
-        <Link href={'/'}>내 구매내역 보러가기</Link>
-    </div>
+    <section className='success section container'>
+        <h1 className='mb-4'>결제가 완료되었습니다.</h1>
+        <div className='mb-3'>
+            <p>주문: {payment.orderName}</p>
+            <p>결제 수단: {payment.method}</p>
+            <p>결제 금액: {payment.totalAmount.toLocaleString()}원</p>
+            <p>
+                결제 일시: {format(new Date(payment.approvedAt), "yyyy/MM/dd HH:mm:ss")}
+            </p>
+        </div>
+        <Link href={'/mypage'}>내 구매내역 보러가기</Link>
+    </section>
   )
 }
