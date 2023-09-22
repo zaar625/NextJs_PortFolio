@@ -52,6 +52,17 @@
             }
             
         }
+
+        &__nonPurchase {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            background-color: rgba(0, 0, 0, 0.483);
+            width: 100%;
+            color: #FFF;
+            text-align: center;
+        }
     }
 
     &__purchase {

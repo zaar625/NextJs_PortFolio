@@ -1,5 +1,5 @@
 import React from 'react'
-import { collection,getFirestore ,query, where, getDocs} from "firebase/firestore";
+import { collection ,query, where, getDocs} from "firebase/firestore";
 import { db } from '@/lib/firebaseConfig';
 import ProductCard from '@/components/product/ProductCard';
 import './class.scss';

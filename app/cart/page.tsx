@@ -24,9 +24,10 @@ export type TCartItem = {
 
 export default function CartPage() {
   const { data: snsSession } = useSession();
-  const router = useRouter()
+  const router = useRouter();
   const currentUser = auth.currentUser?.uid || snsSession?.user?.name;
   const nonUserCartItems = useSelector((state: RootState) => state.cartItem.items);
+
   const [cartItem, setCartItem] = useState<TCartItem[]>();
 
   const getCartItem = async () => {
@@ -72,13 +73,11 @@ export default function CartPage() {
       return;
     }
     // 카트에 상품이 있을 경우 vs 없을 경우
-
     if(cartItem && cartItem.length === 0) {
       alert('카트에 담긴 상품이 없습니다.');
       return;
     }
     // 카트에 상품이 여러개가 담겨있을 경우 대표로 보내줘야 합니다.
-
     if(cartItem && cartItem.length > 0) {
       const FIRST_ITEM = cartItem[0]
       const routeQuery = {
