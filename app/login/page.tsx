@@ -23,7 +23,7 @@ export default function LoginPage() {
     setCredential({...credential, [type]:currInputValue })
   }
 
-  const login = (e) => {
+  const login = (e:any) => {
     e.preventDefault();
 
     if(!credential.email || !credential.password) {
