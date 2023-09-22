@@ -36,6 +36,7 @@ export default function LoginPage() {
       router.push('/');
     })
     .catch((error) => {
+      alert('아이디 또는 비밀번호를 잘못 입력했습니다.')
       const errorCode = error.code;
       const errorMessage = error.message;
     });
