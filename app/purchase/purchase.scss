@@ -8,10 +8,12 @@
 //배송지 입력 
    &__delivery{
         width: 350px;
+
         & h1{
           font-size: 18px;
           margin-bottom: 2rem;
         }   
+
         &__form{
           .label {
                font-size: 14px;
@@ -21,7 +23,6 @@
 
           &__receive {
                margin-bottom: 2rem;
-              
           }
 
           &__address {
@@ -34,6 +35,10 @@
                     width: calc(100% - 20px );
                     margin-bottom: 10px;
                }
+
+               & input:disabled {
+                    cursor: not-allowed;
+                  }
           }
         }
         &__input {

@@ -16,11 +16,12 @@ import {auth} from '@/lib/firebaseConfig'
 import DeliveryFrom from './components/DeliveryFrom';
 import './purchase.scss';
 
-export default function PurchasePage() {
-  const searchParams = useSearchParams();
-  const searchId = searchParams.get('id');
-  const searchColor = searchParams.get('color');
-  const searchQuantity= searchParams.get('quantity');
+export default function PurchasePage({searchParams}:any) {
+
+  const searchParams2 = useSearchParams();
+  const searchId = searchParams2.get('id');
+  const searchColor = searchParams2.get('color');
+  const searchQuantity= searchParams2.get('quantity');
 
   const { data: snsSession } = useSession();
   const user = auth.currentUser?.uid || snsSession?.user?.name;
@@ -79,20 +80,22 @@ export default function PurchasePage() {
     }
 
     if(product){
+      const orderCount = searchParams.itemNum >= 2 ? `${product[0].name} 외 ${searchParams.itemNum -1}` : product[0].name
       await tossPayments.requestPayment("카드",{
         amount:product[0].price * Number(searchQuantity),
         orderId:Math.random().toString(36).slice(2),
-        orderName:product[0].name,
+        orderName:orderCount,
         successUrl:`${window.location.origin}/purchase/success?user=${user}`,
         failUrl:`${window.location.origin}/api/payment/fail`
       })
     }
   }
 
+  
   return (
     <div className='purchase mb-3'>
       <DeliveryFrom inputValues={inputValues} setInputValue={setInputValues}/>
-      <ProductInfo productInfo={product} selectedItemInfo={selectedItemInfo}/>
+      <ProductInfo productInfo={product} searchParams={searchParams}/>
       <BaseButton onClick={tosspaymentHandler}>결제하기</BaseButton>
     </div>
   )

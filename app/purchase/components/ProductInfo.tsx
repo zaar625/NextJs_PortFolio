@@ -1,6 +1,7 @@
 import React from 'react';
 import { DocumentData } from 'firebase/firestore';
 import Image from 'next/image';
+import numberWithCommas from '@/util/numberWithCommas';
 import '../purchase.scss';
 
 type TProps = {
@@ -14,7 +15,9 @@ export type TSelectedItemInfo = {
     searchId:string | null;
 }
 
-export default function ProductInfo({productInfo,selectedItemInfo}:TProps) {
+export default function ProductInfo({productInfo,searchParams }:any) {
+
+  const cartItemLength = searchParams.itemNum;
   return (
     <div className='purchase__productInfo mb-2'>
         {productInfo && 
@@ -31,13 +34,13 @@ export default function ProductInfo({productInfo,selectedItemInfo}:TProps) {
                 height={200}
                 />
                 <div className='purchase__productInfo__infoWrap__info'>
-                    <p><strong>상품명</strong>: {selectedItemInfo.searchId}</p>
-                    <p><strong>색상</strong>: {selectedItemInfo.searchColor}</p>
-                    <p><strong>수량</strong>: {selectedItemInfo.searchQuantity}</p>
-                    <p><strong>가격</strong>: {productInfo[0].price}원</p>
+                  <p><strong>상품명</strong>: {cartItemLength > 2 ? `${searchParams.id} 외 ${cartItemLength-1}` :searchParams.id }</p>
+                  <p><strong>색상</strong>: {searchParams.color}</p>
+                  <p><strong>수량</strong>: {searchParams.quantity}</p>
+                  <p><strong>가격</strong>: {numberWithCommas(searchParams.totalPrice)}원</p>
                 </div>
             </div>
-            <p>총 결제 금액은 {Number(selectedItemInfo.searchQuantity) * productInfo[0].price}원 입니다.</p>
+            <p>총 결제 금액은 {numberWithCommas(searchParams.totalPrice)}원 입니다.</p>
            </>
         }
         

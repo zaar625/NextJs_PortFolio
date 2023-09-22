@@ -46,10 +46,10 @@ export default function DeliveryFrom({inputValues,setInputValue}:Tprops) {
           <div className='purchase__delivery__form__address'>
             <label className='label' htmlFor='address'>배송지 주소</label>
             <div>
-              <input placeholder='우편번호' className='purchase__delivery__input' readOnly value={inputValues.zonecode}/> 
+              <input placeholder='우편번호' className='purchase__delivery__input' disabled value={inputValues.zonecode}/> 
               <button type="button" className='search-button' onClick={searchAddress}>검색</button>
             </div>
-            <input className='purchase__delivery__input' placeholder='주소' readOnly  value={inputValues.address}/>
+            <input className='purchase__delivery__input' placeholder='주소' disabled  value={inputValues.address}/>
             <input className='purchase__delivery__input' placeholder='상세 주소를 입력해주세요.'  onBlur={(e) => onBlurHandler(e, 'detailAdress')}/>
           </div>
 

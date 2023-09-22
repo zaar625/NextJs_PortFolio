@@ -4,18 +4,42 @@
     padding-top: 9rem;
 
     &__info{
-        padding:5px 2rem;
+        padding:5px 10px;
         background-color:rgba(96, 107, 49, .1);
+
+        & > p {
+            font-size: $font-nomal;
+        }
         
     }
 
     &__items {
         display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        
+        grid-template-columns: repeat(8, 1fr);
+        gap:10px;
+
+        @include tablet {
+            grid-template-columns: repeat(6, 1fr);
+        }
+
+        @include mobile {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        @include mobileXS{
+            grid-template-columns: repeat(2, 1fr);
+        }
+
         &__card {
             position: relative;
+
+            & p {
+                font-size: $font-nomal;
+            }
+
             &__imgWrap{
+                border-radius: 15px;
+                overflow: hidden;
                 position: relative;
                 padding-bottom: 150%;
             }
@@ -28,5 +52,33 @@
             }
             
         }
+    }
+
+    &__purchase {
+        position: absolute;
+        // background-color: #727272;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        width: calc(100% - 4rem);
+        padding-right: 20px;
+
+        @include flex (center, flex-end);
+        gap: 2rem;
+        &__price {
+
+            & > p:first-child{
+                font-size: 1.25rem;
+                font-weight: bold;
+            }
+
+            & > p:last-child {
+                font-size: $font-nomal;
+            }
+        }
+    }
+
+    .bold {
+        font-weight: bold
     }
 }

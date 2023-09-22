@@ -10,9 +10,7 @@ import {app} from '@/lib/firebaseConfig'
 import { useRouter } from 'next/navigation'
 import { useDispatch } from 'react-redux';
 import { addItem } from '@/redux/slice/cartItem';
-import { userAddItem } from '@/redux/slice/userCartItem';
-import { db } from '@/lib/firebaseConfig';
-import { doc, setDoc,getFirestore ,collection,getDoc ,addDoc} from 'firebase/firestore';
+import { doc, setDoc,getFirestore ,getDoc} from 'firebase/firestore';
 
 
 interface Item {
@@ -52,10 +50,6 @@ export default function ProductDesc({product}:any) {
     }
 
     if(!color) alert('색상을 선택해주세요.');
-  }
-
-  const filterItemHanlder = (newItem:any) => {
-
   }
 
   const addToCart = useCallback(async () => {
@@ -148,7 +142,7 @@ export default function ProductDesc({product}:any) {
                   <BaseButton>
                     <Link href={{
                     pathname:'/purchase',
-                    query:{id:product[0].name, color,quantity}
+                    query:{id:product[0].name, color,quantity ,totalPrice:quantity*product[0].price}
                     }}>구매하기</Link>
                   </BaseButton>    
                 ) : (

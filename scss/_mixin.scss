@@ -1,5 +1,11 @@
 @use './variables' as *;
 
+@mixin mobileXS {
+    @media only screen and (max-width: 375px) {
+        @content;
+    }
+}
+
 @mixin mobile {
     @media only screen and (max-width: $mobile-width) {
         @content;
@@ -11,7 +17,6 @@
         @content;
     }
 }
-
 
 @mixin flex($aligin-item, $justify-content) {
     display: flex;

@@ -9,6 +9,7 @@ import { removeItem } from '@/redux/slice/cartItem';
 import { useSession } from 'next-auth/react';
 import {auth} from '@/lib/firebaseConfig'
 import { useDispatch } from 'react-redux';
+import numberWithCommas from '@/util/numberWithCommas';
 import '../cart.scss';
 
 type TProps = {
@@ -21,14 +22,22 @@ export default function ItemCard({item,userRemoveCartItem}:TProps) {
   const { data: snsSession } = useSession()
   const firebaseUser = auth.currentUser 
 
-  const isLoginUser = snsSession?.user?.name || firebaseUser?.uid
+  const isLoginUser = snsSession?.user?.name || firebaseUser?.uid;
 
   const removeCartItem = () => {
-    alert('해당 아이템을 삭제하시겠습니까?');
     if (isLoginUser) {
       userRemoveCartItem(item);
     } else {
       dispatch(removeItem(item));
+    }
+  }
+
+  const onDeletBtn = () => {
+
+    if (!confirm("게시물을 삭세하시겠습니까?")) {
+      return;
+    } else {
+      removeCartItem();
     }
   };
 
@@ -43,11 +52,11 @@ export default function ItemCard({item,userRemoveCartItem}:TProps) {
         }}
         />
       </div>
-      <p>{item.name}</p>
+      <p className='bold'>{item.name}</p>
       <p>{item.color}</p>
-      <p>{item.price}</p>
-      <p>{item.quantity}</p>
-      <button type='button' onClick={removeCartItem} className='cart__items__card__deleteBtn'><RiDeleteBin6Line/></button>
+      <p>{numberWithCommas(String(item.price))}원</p>
+      <p>수량: {item.quantity}</p>
+      <button type='button' onClick={onDeletBtn} className='cart__items__card__deleteBtn'><RiDeleteBin6Line/></button>
     </div>
   )
 }

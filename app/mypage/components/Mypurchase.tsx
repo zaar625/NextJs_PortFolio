@@ -20,8 +20,6 @@ export default function Mypurchase({user}:{user:string | null}) {
     setPurchaseItem(purchases);
   };
 
-  // console.log(purchaseItem);
-
   useEffect(()=>{
     getUserPurchaseItem();
   },[user]);

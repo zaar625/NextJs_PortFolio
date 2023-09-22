@@ -32,7 +32,7 @@ export default function MyReview({user}:{user:string | null}) {
         getMyReview();
       }
     }
-    console.log(reviewData)
+  
   return (
     <div className='myReview'>
       <h1 className='mb-1'>작성한 글</h1>
