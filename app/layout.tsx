@@ -7,7 +7,7 @@ import '../scss/reset.modules.scss';
 import Footer from '@/components/footer/Footer';
 import { ReduxProvider } from '@/redux/ReduxProvider';
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'], fallback:['system-ui', 'arial'] })
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -22,8 +22,7 @@ export default function RootLayout({
 
 
   return (
-    <html lang="en">
-      
+    <html lang="ko">
       <body className={inter.className}>
           <AuthSession>
             <ReduxProvider>

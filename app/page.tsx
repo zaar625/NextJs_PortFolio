@@ -17,16 +17,13 @@ export const metadata: Metadata = {
   colorScheme:'dark light',
   viewport:{
     width:'device-width',
-    userScalable:false,
     initialScale:1,
-    maximumScale:1,
-    minimumScale:1,
     viewportFit:'cover'
   },
   robots: {
-    index: false,
+    index: true,
     follow: true,
-    nocache: true,
+    nocache: false,
     googleBot: {
       index: true,
       follow: false,
