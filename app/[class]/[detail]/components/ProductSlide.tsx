@@ -9,8 +9,8 @@ import 'swiper/css';
 
 
 export default function ProductSlide({product}:any) {
+  const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
   
-    const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
   return (
     <div className='productDetail__imageBox'>
         <Swiper
@@ -27,6 +27,7 @@ export default function ProductSlide({product}:any) {
                 <Image src={item} alt="product images" 
                 width={450}
                 height={450}
+                
                 />
             </SwiperSlide>
         ))}

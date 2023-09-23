@@ -24,6 +24,18 @@ export async function generateMetadata ({params, searchParams}:any, parent:Resol
     openGraph: {
       images: [product[0].image, ...previousImages],
     },
+    robots: {
+      index: false,
+      follow: true,
+      nocache: true,
+      googleBot: {
+        index: true,
+        follow: false,
+        noimageindex: true,
+        'max-image-preview': 'standard',
+        'max-snippet': -1,
+      },
+    },
   }
 }
 

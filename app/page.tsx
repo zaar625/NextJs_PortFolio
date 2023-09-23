@@ -22,7 +22,19 @@ export const metadata: Metadata = {
     maximumScale:1,
     minimumScale:1,
     viewportFit:'cover'
-  }
+  },
+  robots: {
+    index: false,
+    follow: true,
+    nocache: true,
+    googleBot: {
+      index: true,
+      follow: false,
+      noimageindex: true,
+      'max-image-preview': 'standard',
+      'max-snippet': -1,
+    },
+  },
 }
 
 export default function Home() {

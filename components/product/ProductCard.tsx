@@ -4,16 +4,9 @@ import React,{useState} from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import numberWithCommas from '@/util/numberWithCommas';
-import LikeIcon from '/public/icon/like.svg'
-import { doc, setDoc } from "firebase/firestore"; 
-import { db } from '@/lib/firebaseConfig';
-import { useSession } from 'next-auth/react';
-import {auth} from '@/lib/firebaseConfig'
 import './product-card.scss';
 
 export default function ProductCard({data}:any) {
-  const { data: snsSession } = useSession();
-  const user = auth.currentUser?.uid || snsSession?.user?.name;
   const [like, setlike] = useState(false);
   const [timer, setTimer] = useState(0); 
 
