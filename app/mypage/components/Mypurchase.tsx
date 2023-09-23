@@ -5,10 +5,13 @@ import { db } from '@/lib/firebaseConfig';
 import { collection ,query, where, getDocs, DocumentData} from 'firebase/firestore';
 import '../mypage.scss';
 import format from 'date-fns/format';
-import Image from 'next/image';
+import {auth} from '@/lib/firebaseConfig'
+import { useSession } from 'next-auth/react';
 
-export default function Mypurchase({user}:{user:string | null}) {
+export default function Mypurchase() {
   const [purchaseItem, setPurchaseItem] = useState<DocumentData[]>();
+  const { data: snsSession } = useSession();
+  const user = auth.currentUser?.uid || snsSession?.user?.name;
 
   async function getUserPurchaseItem(){
     

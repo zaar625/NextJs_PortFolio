@@ -3,11 +3,16 @@
 import React, {useEffect, useState} from 'react'
 import { collection,query,where,getDocs,DocumentData,deleteDoc,doc } from 'firebase/firestore';
 import { db } from '@/lib/firebaseConfig';
+import { useSession } from 'next-auth/react';
+import {auth} from '@/lib/firebaseConfig'
 import '../mypage.scss';
 import Link from 'next/link';
 
-export default function MyReview({user}:{user:string | null}) {
+export default function MyReview() {
     const [reviewData, setReviewData] = useState<DocumentData[]>()
+    const { data: snsSession } = useSession();
+    const user = auth.currentUser?.uid || snsSession?.user?.name;
+    console.log(user)
 
     async function getMyReview(){
       const docRef = collection(db, "review");
@@ -37,7 +42,7 @@ export default function MyReview({user}:{user:string | null}) {
     <div className='myReview'>
       <h1 className='mb-1'>작성한 글</h1>
       {
-        reviewData ? reviewData.map((reviewItem, index) => (
+        reviewData?.length ? reviewData.map((reviewItem, index) => (
           <div key={index} className='myReview__card '>
             <div className='myReview__card__product'>
               <p>상품: {reviewItem.product}</p>

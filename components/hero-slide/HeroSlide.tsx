@@ -74,14 +74,14 @@ function SwiperButton({pageNum}:{pageNum:number}) {
   }
   return (
     <div className='slide-player'>
-        <button className='slide-player__button' onClick={()=>swiper.slidePrev()}>
+        <button className='slide-player__button' aria-label="이전" onClick={()=>swiper.slidePrev()}>
           <GrFormPrevious/>
         </button>
         <p className='slide-player__page'>{pageNum} / 3</p>
-        <button className='slide-player__button'  onClick={()=>swiper.slideNext()}>
+        <button className='slide-player__button' aria-label="다음" onClick={()=>swiper.slideNext()}>
           <GrFormNext/> 
         </button>
-        <button className='slide-player__autoPlay' onClick={autoPlayActive}>
+        <button className='slide-player__autoPlay' aria-label={autoPlay ? "중지" : "재생"} onClick={autoPlayActive}>
           {
             autoPlay ? <AiOutlinePause/> : <FiPlay />
           }

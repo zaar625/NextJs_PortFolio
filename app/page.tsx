@@ -8,7 +8,21 @@ import Trend from '@/components/trend/Trend';
 
 export const metadata: Metadata = {
   title: 'BABAN',
+  openGraph: {
+    title: 'BABAN',
+    description: '가방의 모든 것, BABAN에서 트렌디하게',
+  },
   description: '가방의 모든 것, BABAN에서 트렌디하게',
+  authors:[{ name: 'BABAN' }],
+  colorScheme:'dark light',
+  viewport:{
+    width:'device-width',
+    userScalable:false,
+    initialScale:1,
+    maximumScale:1,
+    minimumScale:1,
+    viewportFit:'cover'
+  }
 }
 
 export default function Home() {
