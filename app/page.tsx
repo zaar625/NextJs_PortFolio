@@ -4,7 +4,6 @@ import HeroSlide from '@/components/hero-slide/HeroSlide';
 import NewArrival from '@/components/new-arrival/NewArrival';
 import Season from '@/components/season/Season';
 import Trend from '@/components/trend/Trend';
-  
 
 export const metadata: Metadata = {
   title: 'BABAN',
@@ -34,8 +33,8 @@ export const metadata: Metadata = {
   },
 }
 
-export default function Home() {
-  
+
+export default async function Home() {
   return (
     <>
       <HeroSlide/>

@@ -1,8 +1,8 @@
 import React from 'react'
 import './product-detail.scss';
 import ProductSlide from './components/ProductSlide';
-import { collection,getFirestore ,query, where, getDocs} from "firebase/firestore";
-import {app} from '../../../lib/firebaseConfig'
+import { collection ,query, where, getDocs} from "firebase/firestore/lite";
+import { db } from '../../../lib/firebaseConfig';
 import ProductDesc from './components/ProductDesc';
 import Review from './components/ReviewCard';
 import { Metadata, ResolvingMetadata } from 'next';
@@ -10,8 +10,6 @@ import { Metadata, ResolvingMetadata } from 'next';
 export async function generateMetadata ({params, searchParams}:any, parent:ResolvingMetadata):Promise<Metadata>{
 
   const productName = decodeURIComponent(params.detail);
-  
-  const db = getFirestore(app);
   const docRef = collection(db, "products");
   const q = query(docRef, where('name', '==',`${productName}`));
   const querySnapshot = (await getDocs(q)).docs;
@@ -41,8 +39,7 @@ export async function generateMetadata ({params, searchParams}:any, parent:Resol
 
 export default async function ProductiDetailPage({params}:any) {
   const productName = decodeURIComponent(params.detail);
-  
-  const db = getFirestore(app);
+
   const docRef = collection(db, "products");
   const q = query(docRef, where('name', '==',`${productName}`));
   const querySnapshot = (await getDocs(q)).docs;
