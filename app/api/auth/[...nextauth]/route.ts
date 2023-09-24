@@ -15,9 +15,9 @@ const authOption = {
             clientSecret: process.env.KAKAO_CLIENT_SECRET as string,
           }),
     ],
-    pages: {
-        signIn: "/auth/signIn",
-    },
+    // pages: {
+    //     signIn: "/auth/signIn",
+    // },
     callbacks: {
         async redirect() {
             return '/'
