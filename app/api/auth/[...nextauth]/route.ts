@@ -11,8 +11,8 @@ const authOption = {
             clientSecret:process.env.GOOGLE_CLIENT_SECRET as string,
         }),
         KakaoProvider({
-            clientId: process.env.KAKAO_CLIENT_ID!,
-            clientSecret: process.env.KAKAO_CLIENT_SECRET!,
+            clientId: process.env.KAKAO_CLIENT_ID as string,
+            clientSecret: process.env.KAKAO_CLIENT_SECRET as string,
           }),
     ],
     pages: {
