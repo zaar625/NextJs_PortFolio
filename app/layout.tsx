@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 }
 
 async function getSession(cookie: string): Promise<Session> {
-  const response = await fetch(`${process.env.LOCAL_AUTH_URL}/api/auth/session`, {
+  const response = await fetch(`https://babanshop.vercel.app/api/auth/session`, {
     headers: {
       cookie,
     },
