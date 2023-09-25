@@ -32,6 +32,7 @@ export default function Header() {
           headerRef.current?.classList.add('shrink');
         } else {
           headerRef.current?.classList.remove('shrink');
+          
         }
       }
     };
@@ -70,10 +71,10 @@ export default function Header() {
           </button>
           <ul className='header__nav-right'>
           <li>
-            {firebaseUser || snsSession ? <button onClick={logout}>logout</button> : <Link href={'/login'}>login</Link>}
+            {isUser ? <button onClick={logout}>logout</button> : <Link href={'/login'}>login</Link>}
           </li>
           <li>
-            {(firebaseUser || snsSession ) && <Link href={'/mypage'}>mypage</Link>}
+            {isUser && <Link href={'/mypage'}>mypage</Link>}
           </li>
           {headerNav.map((link, index) => {
           const isActive = pathName === link.path;
