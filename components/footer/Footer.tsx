@@ -1,7 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { FaFacebookF, FaTwitter } from 'react-icons/fa';
+import { FaFacebookF } from 'react-icons/fa';
+import { RiTwitterXFill } from 'react-icons/ri';
 import { BsInstagram } from 'react-icons/bs';
 import './footer.scss';
 
@@ -46,7 +47,7 @@ export default function Footer() {
           </a>
           <a href="https://twitter.com/" className="footer__social-link">
             <p className="a11y-hidden">twitter</p>
-            <FaTwitter />
+            <RiTwitterXFill />
           </a>
         </li>
       </ul>

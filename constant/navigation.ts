@@ -1,9 +1,5 @@
 export const headerNav = [
     {
-      display:'mypage',
-      path:'/mypage'
-    },
-    {
       display:'cart',
       path:'/cart'
     },

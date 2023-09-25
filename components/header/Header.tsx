@@ -5,8 +5,6 @@ import { usePathname } from 'next/navigation'
 import Link from 'next/link';
 import {AiOutlineMenu,AiOutlineClose} from 'react-icons/ai'
 import { headerNav , productNav} from '@/constant/navigation';
-import { getAuth } from "firebase/auth";
-import {app} from '@/lib/firebaseConfig';
 import { useSession,signOut } from "next-auth/react"
 import {auth} from '@/lib/firebaseConfig'
 
@@ -73,6 +71,9 @@ export default function Header() {
           <ul className='header__nav-right'>
           <li>
             {firebaseUser || snsSession ? <button onClick={logout}>logout</button> : <Link href={'/login'}>login</Link>}
+          </li>
+          <li>
+            {(firebaseUser || snsSession ) && <Link href={'/mypage'}>mypage</Link>}
           </li>
           {headerNav.map((link, index) => {
           const isActive = pathName === link.path;

@@ -56,7 +56,7 @@ export default function LoginPage() {
             </div>
             <div className='login__password'>
               <label className='login__form__label'>비밀번호</label>
-              <input className='login__password__input' placeholder='비밀번호를 입력해주세요.' onBlur={(e) => inputOnblur(e,'password')}/>
+              <input type='password' className='login__password__input' placeholder='비밀번호를 입력해주세요.' onBlur={(e) => inputOnblur(e,'password')}/>
             </div>
             <button className='login__button' type='submit'>로그인</button>
         </form>
