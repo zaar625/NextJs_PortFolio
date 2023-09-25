@@ -1,7 +1,7 @@
 import React from 'react'
 import './product-detail.scss';
 import ProductSlide from './components/ProductSlide';
-import { collection ,query, where, getDocs} from "firebase/firestore/lite";
+import { collection ,query, where, getDocs} from "firebase/firestore";
 import { db } from '../../../lib/firebaseConfig';
 import ProductDesc from './components/ProductDesc';
 import Review from './components/ReviewCard';
