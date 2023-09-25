@@ -7,6 +7,7 @@ import '../mypage.scss';
 import format from 'date-fns/format';
 import {auth} from '@/lib/firebaseConfig'
 import { useSession } from 'next-auth/react';
+import Link from 'next/link';
 
 export default function Mypurchase() {
   const [purchaseItem, setPurchaseItem] = useState<DocumentData[]>();
@@ -32,18 +33,18 @@ export default function Mypurchase() {
     <div className='purchase mb-2'>
       <h1 className='mb-1'>구매 내역</h1>
       {
-        purchaseItem && purchaseItem.length > 0? purchaseItem.map((item) => (
-          <>
-            <div key={item.orderId} className='purchase__card'>
+        purchaseItem && purchaseItem.length > 0? purchaseItem.map((item, index) => (
+          <div key={index}  className='purchase__card'>
+            <div key={item.orderId}>
               <p>주문아이디: {item.orderId}</p>
               <p>상품명: {item.orderName}</p>
               <p>총 결제 금액: {item.totalAmount.toLocaleString()}원</p>
               <p>결제 일시: {format(new Date(item.approvedAt), "yyyy/MM/dd HH:mm:ss")}</p>
             </div>
-             {/* <div className='productDetail__wirteBtn'>
-              <Link href={`/${params.class}/${params.detail}/review`}>리뷰 작성하기</Link>
-            </div> */}
-          </>
+             <div className='review__wirteBtn'>
+              <Link href={`/review/${item.orderName}`}>리뷰 작성하기</Link>
+            </div>
+          </div>
         ))
         :
         <div className='purchase__empty'>

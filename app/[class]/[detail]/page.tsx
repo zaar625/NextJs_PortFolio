@@ -64,10 +64,7 @@ export default async function ProductiDetailPage({params}:any) {
       <ProductSlide product={product}/>
       <ProductDesc product={product}/>
     </figure>
-    {/* 리뷰 */}
-    {/* <div className='productDetail__wirteBtn'>
-      <Link href={`/${params.class}/${params.detail}/review`}>리뷰 작성하기</Link>
-    </div> */}
+  
     <Review productName={productName} productInfo={product[0]}/>
   </section>
   )

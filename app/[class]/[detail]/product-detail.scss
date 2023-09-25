@@ -99,26 +99,7 @@
         }
 
     }
-
-    &__wirteBtn {
-        @include flex(unset, flex-end);
-
-        & > a{
-            border: solid  1px $primary;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 0.825rem;
-            font-weight: 500;
-
-            &:hover {
-                background-color: $primary;
-                color:#FFF;
-                transition: all 0.2s ease;
-            }
-        }
-    }
-
-
+    
     .swiper-slide{
         & > img {
             max-width: 450px;

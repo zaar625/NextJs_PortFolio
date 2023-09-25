@@ -4,12 +4,13 @@ import React,{useRef, FocusEvent, useState} from 'react';
 import {AiOutlineClose} from 'react-icons/ai';
 import { storage } from '@/lib/firebaseConfig';
 import {ref ,getDownloadURL,uploadBytes} from "firebase/storage";
-import {doc, setDoc,updateDoc} from "firebase/firestore";
+import {doc,updateDoc} from "firebase/firestore";
+import { useRouter } from 'next/navigation';
 import { db } from '@/lib/firebaseConfig';
-import '@/app/[class]/[detail]/review/review.scss';
+import '@/app/review/[product]/review.scss';
 
 export default function EditReviewPage({searchParams}:any) {
-
+    const router = useRouter();
     const imageInputRef = useRef<HTMLInputElement | null>(null);
     const [images, setImages] = useState<FileList[]>([]);
     const [formInput, setFormInput] = useState({
@@ -64,7 +65,10 @@ export default function EditReviewPage({searchParams}:any) {
           content:formInput.content,
         }
         const docRef = doc(db, "review",searchParams.id );
-        await updateDoc(docRef, updateData).then(()=> alert('수정이 완료되었습니다.'))
+        await updateDoc(docRef, updateData).then(()=> {
+          alert('수정이 완료되었습니다.');
+          router.back();
+        })
       }
     
   return (

@@ -3,7 +3,7 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from '@/lib/firebaseConfig';
 import Image from 'next/image';
 import format from 'date-fns/format';
-import '../review/review.scss';
+import '@/app/review/[product]/review.scss'
 
 async function getReviewData(q:string) {
   const queryParams = query(collection(db, "review"), where("product", "==", q));
