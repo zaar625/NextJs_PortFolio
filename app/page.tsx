@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   },
   description: '가방의 모든 것, BABAN에서 트렌디하게',
   authors:[{ name: 'BABAN' }],
-  colorScheme:'dark light',
+  colorScheme:'light',
   viewport:{
     width:'device-width',
     initialScale:1,

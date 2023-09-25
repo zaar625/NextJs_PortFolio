@@ -21,6 +21,7 @@
         @include mobile {
             width: 100%;
             padding-top: 65%;
+            background-attachment: unset;
         }
     }
     &__right{
