@@ -20,7 +20,6 @@ export default function PurchasePage({searchParams}:any) {
 
   const searchParams2 = useSearchParams();
   const searchId = searchParams2.get('id');
-  const searchColor = searchParams2.get('color');
   const searchQuantity= searchParams2.get('quantity');
 
   const { data: snsSession } = useSession();
@@ -44,12 +43,6 @@ export default function PurchasePage({searchParams}:any) {
       }
     }
     return false; // 모든 값이 비어있지 않으면 false를 반환
-  }
-
-  const selectedItemInfo = {
-    searchColor,
-    searchQuantity,
-    searchId,
   }
 
 // 아이템 정보 가져오기

@@ -7,7 +7,7 @@ import {AiOutlineClose} from 'react-icons/ai'
 import { useSession } from 'next-auth/react';
 import {auth} from '@/lib/firebaseConfig'
 import { db } from '@/lib/firebaseConfig';
-import {addDoc, collection,doc, setDoc} from "firebase/firestore"; 
+import { collection,doc, setDoc} from "firebase/firestore"; 
 
 import './review.scss';
 
@@ -68,6 +68,7 @@ export default function ProductReviewPage({params}:{params:TParams}) {
         product:productName,
         class:params.class,
       }
+      
       const docRef = doc(collection(db,"review"));
       const refId = docRef.id;
       await setDoc(docRef,{...reviewData, id:refId}).then(()=>alert('리뷰 작성이 완료되었습니다.'))

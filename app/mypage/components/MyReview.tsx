@@ -63,7 +63,7 @@ export default function MyReview() {
           </div>
         ))
         :
-        <div>
+        <div className='purchase__empty'>
           <p>작성한 리뷰가 없습니다.</p>
         </div>
       }

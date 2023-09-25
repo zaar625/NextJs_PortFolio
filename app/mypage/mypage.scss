@@ -4,10 +4,16 @@
     padding: 9rem 2rem 0;
 
     .purchase {
-
         &__card {
             padding: 1rem 0;
             border-bottom: solid 0.5px #cac9c9;
+        }
+
+        &__empty {
+            & p {
+                color: #727272;
+                text-align: center
+            }
         }
     }
 
