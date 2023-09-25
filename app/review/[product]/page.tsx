@@ -33,6 +33,12 @@ export default function ProductReviewPage({params}:{params:TParams}) {
   // 이미지가 선택될 때 호출될 함수
   const handleImageChange = (e:React.ChangeEvent<HTMLInputElement>) => {
   const files = e.target.files as FileList; // 선택된 파일 목록을 가져옵니다.
+    console.log(images.length)
+  if(images.length > 2) {
+    alert('이미지는 최대 3장까지만 첨부 가능합니다.');
+    return;
+  }
+
   setImages([...images,files])
 
   }
@@ -107,7 +113,7 @@ export default function ProductReviewPage({params}:{params:TParams}) {
         </div>
 
         <div className='mb-1'>
-          <input ref={imageInputRef} placeholder='사진을 첨부해주세요' type='file' name='file'multiple onChange={handleImageChange} style={{display:'none'}}/>
+          <input ref={imageInputRef} placeholder='사진을 첨부해주세요' type='file' name='file' multiple onChange={handleImageChange} style={{display:'none'}} accept=".jpg, .jpeg, .png"/>
           <button className='upload-btn' type='button' onClick={openSelectFileWindow} >파일찾기</button>
         </div>
       </form>
