@@ -97,9 +97,10 @@ export default function CartPage() {
       </div>
       <div className='cart__items'>
         {
-          cartItem && cartItem.map((item,index) => <ItemCard item={item} key={item.id} userRemoveCartItem={userRemoveCartItem}/>)
+          cartItem && cartItem.length > 0 && cartItem.map((item,index) => <ItemCard item={item} key={item.id} userRemoveCartItem={userRemoveCartItem}/>)
         }
       </div>
+      {cartItem && !cartItem.length && (<div className='cart__empty'><p>장바구니에 담긴 아이템이 없습니다.</p></div>)}
       {/* 구매하기 */}
       <div className='cart__purchase'>
         <div className='cart__purchase__price'>

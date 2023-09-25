@@ -63,6 +63,16 @@
             color: #FFF;
             text-align: center;
         }
+
+    }
+
+    &__empty {
+        min-height: 100px;
+
+        & p {
+            text-align: center;
+            color:#727272
+        }
     }
 
     &__purchase {
