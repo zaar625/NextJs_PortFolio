@@ -76,12 +76,12 @@ export default function EditReviewPage({searchParams}:any) {
     <form className='review__form'>
       <div className='review__form__container'>
         <label className='review__form__label mb-1' htmlFor='title'>제목</label>
-        <input className='review__form__input mb-1' defaultValue={searchParams.title} placeholder='제목을 입력해주세요.' onBlur={(e)=> onInputBlurEvent(e,'title')} name='title'/>
+        <input type='text' className='review__form__input mb-1' defaultValue={searchParams.title} placeholder='제목을 입력해주세요.' onBlur={(e)=> onInputBlurEvent(e,'title')} name='title'/>
       </div>
 
       <div className='review__form__container'>
-        <label className='review__form__label mb-1' >내용</label>
-        <textarea className='review__form__textArea mb-1' defaultValue={searchParams.content} placeholder='내용을 입력해주세요.' rows={4} cols={50} onBlur={(e)=> onInputBlurEvent(e,'content')}/>
+        <label className='review__form__label mb-1' htmlFor='내용입력'>내용</label>
+        <textarea name='내용입력' className='review__form__textArea mb-1' defaultValue={searchParams.content} placeholder='내용을 입력해주세요.' rows={4} cols={50} onBlur={(e)=> onInputBlurEvent(e,'content')}/>
       </div>
 
       <div className='mb-1'>

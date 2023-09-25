@@ -98,7 +98,7 @@ export default function ProductReviewPage({params}:{params:TParams}) {
       <form className='review__form'>
         <div className='review__form__container'>
           <label className='review__form__label mb-1' htmlFor='title'>제목</label>
-          <input className='review__form__input mb-1' placeholder='제목을 입력해주세요.' onBlur={(e)=> onInputBlurEvent(e,'title')} name='title'/>
+          <input type='text' className='review__form__input mb-1' placeholder='제목을 입력해주세요.' onBlur={(e)=> onInputBlurEvent(e,'title')} name='title'/>
         </div>
 
         <div className='review__form__container'>

@@ -70,18 +70,18 @@ export default function SignUpPage() {
       <h1 className='mb-4'>가입하기</h1>
       <form className='signUp__form' onSubmit={signUp}>
         <div className='signUp__email'>
-          <label className='signUp__form__label'>이메일</label>
-          <input className={`signUp__email__input ${inputsValue.email === null ? 'null' : !checkEmailValidity() && 'error'  }`} placeholder='이메일을 입력해주세요.' onBlur={(e) => inputEventHandler(e,'email')}/>
+          <label className='signUp__form__label' htmlFor='email'>이메일</label>
+          <input name='email' type='email' className={`signUp__email__input ${inputsValue.email === null ? 'null' : !checkEmailValidity() && 'error'  }`} placeholder='이메일을 입력해주세요.' onBlur={(e) => inputEventHandler(e,'email')}/>
           {inputsValue.email !== null  && !checkEmailValidity() && 'error' && <p>이메일을 확인해주세요.</p>}
         </div>
         <div className='signUp__password'>
-          <label className={`signUp__form__label`} >비밀번호</label>
-          <input className={`signUp__password__input ${inputsValue.password === null ? null : !inputsValue.password.length && 'error'}`} placeholder='비밀번호를 입력해주세요.' onBlur={(e) => inputEventHandler(e,'password')}/>
+          <label htmlFor='password' className={`signUp__form__label`} >비밀번호</label>
+          <input type='password' className={`signUp__password__input ${inputsValue.password === null ? null : !inputsValue.password.length && 'error'}`} placeholder='비밀번호를 입력해주세요.' onBlur={(e) => inputEventHandler(e,'password')}/>
           {inputsValue.password === null ? null : !inputsValue.password.length && <p>비밀번호를 입력해주세요.</p>}
         </div>
         <div className='signUp__password'>
-          <label className='signUp__form__label' >비밀번호 재입력</label>
-          <input className={`signUp__password__input ${inputsValue.samePassword === false ? 'error' : null}`} placeholder='비밀번호를 입력해주세요.' onBlur={(e) => inputEventHandler(e,'samePassword')}/>
+          <label htmlFor='confirm password' className='signUp__form__label' >비밀번호 재입력</label>
+          <input type='password' name='confirm password' className={`signUp__password__input ${inputsValue.samePassword === false ? 'error' : null}`} placeholder='비밀번호를 입력해주세요.' onBlur={(e) => inputEventHandler(e,'samePassword')}/>
           {inputsValue.samePassword === false && <p>비밀번호가 다릅니다.</p>}
         </div>
         <button className='signUp__button' type="submit">회원가입</button>
