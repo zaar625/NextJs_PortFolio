@@ -1,7 +1,10 @@
 import React from 'react'
+import './loading.scss';
 
-export default function loading() {
+export default function Loading() {
   return (
-    <div>loading...</div>
+    <div className="loader">
+
+  </div>
   )
 }

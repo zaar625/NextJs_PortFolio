@@ -8,6 +8,8 @@ import Footer from '@/components/footer/Footer';
 import { ReduxProvider } from '@/redux/ReduxProvider';
 import { headers } from 'next/headers'
 import { Session } from 'next-auth'
+import { Suspense } from 'react'
+import Loading from './loading';
 
 const inter = Inter({ subsets: ['latin'], fallback:['system-ui', 'arial'], display: 'swap', })
 
@@ -40,13 +42,13 @@ export default async function RootLayout({
       <body className={inter.className}>
           <AuthSession session={session}>
             <ReduxProvider>
-              <>
+              <Suspense fallback={<Loading/>}>
                 <Header/>
                 <main style={{ minHeight: 'calc(100vh - 9rem)' }}>
                 {children}
                 </main>
                 <Footer/>
-              </>
+              </Suspense>
             </ReduxProvider>
           </AuthSession>
       </body>
