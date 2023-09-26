@@ -46,7 +46,7 @@ function ReviewItem({reviewData,productInfo}:any) {
         </div>
       </div>
       {/* 내용 */}
-      <div className='review-card__item__contents'>
+      <div className='review-card__item__contents mb-1'>
         <p>제목: {reviewData.title}</p>
         <p>내용:</p>
         <p>{reviewData.content}</p>
