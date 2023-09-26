@@ -42,7 +42,8 @@ async function savePurchaseItemDB(payment:any, userId: string) {
         orderName,
         totalAmount,
         approvedAt,
-        method
+        method,
+        review:false,
     };
 
     try{
