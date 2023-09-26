@@ -4,9 +4,10 @@ import React,{useState} from 'react';
 import {signIn} from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation'
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword} from "firebase/auth";
 import {app} from '@/lib/firebaseConfig'
 import './login.scss';
+
 
 
 
@@ -30,10 +31,10 @@ export default function LoginPage() {
       alert('로그인 정보를 입력해주세요.');
       return
     }
-    
+
     signInWithEmailAndPassword(auth, credential.email, credential.password)
     .then((userCredential) => {
-      router.push('/');
+      router.push('/')
     })
     .catch((error) => {
       alert('아이디 또는 비밀번호를 잘못 입력했습니다.')

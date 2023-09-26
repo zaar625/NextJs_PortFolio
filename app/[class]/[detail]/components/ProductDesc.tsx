@@ -85,13 +85,13 @@ export default function ProductDesc({product}:any) {
             quantity: newItem.quantity + duplicate[0].quantity
           }];
 
-          await setDoc(doc(db, "user", isLoginUser),{cart:newData});
+          await setDoc(doc(db, "user", isLoginUser),{cart:newData}).then(()=>alert('장바구니에 담겼습니다.'));
         } else {
           const newData = [...cartList, {
             ...newItem,
             id: cartList.length > 0 ? cartList[cartList.length - 1].id + 1 : 1
           }];
-          await setDoc(doc(db, "user", isLoginUser),{cart:newData});
+          await setDoc(doc(db, "user", isLoginUser),{cart:newData}).then(()=>alert('장바구니에 담겼습니다.'));
         }
       } else {
         await setDoc(doc(db, "user", isLoginUser),{cart:[{...newItem, id:0}]}).then(()=>alert('장바구니에 담겼습니다.'));

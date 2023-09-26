@@ -7,18 +7,19 @@ import {AiOutlineMenu,AiOutlineClose} from 'react-icons/ai'
 import { headerNav , productNav} from '@/constant/navigation';
 import { useSession,signOut } from "next-auth/react"
 import {auth} from '@/lib/firebaseConfig'
+import { onAuthStateChanged } from 'firebase/auth';
 
 import './header.scss';
 
 
 export default function Header() {
-  const [menuIsActive, setMenuIsActive] = useState(false) 
+  const [menuIsActive, setMenuIsActive] = useState(false);
+  const [firebaseUser, setFirebaseUser] = useState<null | string>(null);
   const { data: snsSession } = useSession()
-  const firebaseUser = auth.currentUser ;
+  // const firebaseUser = auth.currentUser ;
   
   const headerRef = useRef<HTMLDivElement>(null);
   const pathName = usePathname();
-  
 
   const isUser = firebaseUser || snsSession
 
@@ -56,6 +57,20 @@ export default function Header() {
       window.location.replace('/');
     }
   }
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/auth.user
+      const uid = user.uid;
+      setFirebaseUser(user.uid)
+      // ...
+    } else {
+      setFirebaseUser(null);
+      // User is signed out
+      // ...
+    }
+  });
 
   return (
     <header ref ={headerRef}className='header'>

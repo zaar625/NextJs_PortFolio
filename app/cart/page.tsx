@@ -27,7 +27,7 @@ export default function CartPage() {
   const router = useRouter();
   const currentUser = auth.currentUser?.uid || snsSession?.user?.name;
   const nonUserCartItems = useSelector((state: RootState) => state.cartItem.items);
-
+  console.log(currentUser)
   const [cartItem, setCartItem] = useState<TCartItem[]>();
 
   const getCartItem = async () => {

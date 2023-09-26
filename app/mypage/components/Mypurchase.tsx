@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { db } from '@/lib/firebaseConfig';
-import { collection ,query, where, getDocs, DocumentData} from 'firebase/firestore';
+import { collection ,query, where, getDocs, DocumentData, orderBy} from 'firebase/firestore';
 import '../mypage.scss';
 import format from 'date-fns/format';
 import {auth} from '@/lib/firebaseConfig'
@@ -16,8 +16,8 @@ export default function Mypurchase() {
 
   async function getUserPurchaseItem(){
     
-    const docRef = collection(db, "purchases");
-    const q = query(docRef, where('userId', '==',`${user}`));
+    const docRef = collection(db, "purchases" , )
+    const q = query(docRef, where('userId', '==',`${user}`),orderBy('approvedAt','desc'));
     const querySnapshot = (await getDocs(q)).docs;
     const purchases = querySnapshot.map((item) => item.data());
 
