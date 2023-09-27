@@ -42,7 +42,9 @@ export default function Mypurchase() {
               <p>결제 일시: {format(new Date(item.approvedAt), "yyyy/MM/dd HH:mm:ss")}</p>
             </div>
              <div className='review__wirteBtn'>
-              <Link href={`/review/${item.orderName}`}>리뷰 작성하기</Link>
+              {
+                item.review ? <p>작성완료</p> : <Link href={`/review/${item.orderId}/?orderName=${item.orderName}`}>리뷰 작성하기</Link>
+              } 
             </div>
           </div>
         ))

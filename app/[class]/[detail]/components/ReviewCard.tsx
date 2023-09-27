@@ -5,10 +5,7 @@ import { collection, query, where, getDocs, limit, DocumentData, startAt,orderBy
 import { db } from '@/lib/firebaseConfig';
 import Image from 'next/image';
 import format from 'date-fns/format';
-import '@/app/review/[product]/review.scss'
-import { limitToFirst } from 'firebase/database';
-
-
+import '@/app/review/[orderId]/review.scss'
 
 export default  function Review({productInfo}:{productInfo:any}) {
   const [reviews, setReview] = useState<DocumentData[]>();

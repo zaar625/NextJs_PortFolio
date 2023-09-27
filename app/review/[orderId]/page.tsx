@@ -13,11 +13,12 @@ import { collection,doc, setDoc, updateDoc} from "firebase/firestore";
 import './review.scss';
 
 type TParams = {
-  product:string;
+  orderId:string;
 }
 
-export default function ProductReviewPage({params}:{params:TParams}) {
-  const productName = decodeURIComponent(params.product);
+export default function ProductReviewPage({params, searchParams}:{params:TParams, searchParams:any}) {
+  const orderId = params.orderId;
+  const {orderName} = searchParams;
   const router = useRouter();
 
   const [images, setImages] = useState<FileList[]>([]);
@@ -33,7 +34,6 @@ export default function ProductReviewPage({params}:{params:TParams}) {
   // 이미지가 선택될 때 호출될 함수
   const handleImageChange = (e:React.ChangeEvent<HTMLInputElement>) => {
   const files = e.target.files as FileList; // 선택된 파일 목록을 가져옵니다.
-    console.log(images.length)
   if(images.length > 2) {
     alert('이미지는 최대 3장까지만 첨부 가능합니다.');
     return;
@@ -58,11 +58,12 @@ export default function ProductReviewPage({params}:{params:TParams}) {
 
     await Promise.all(
       images.map(async (image, index) => {
-        const storageRef =  ref(storage,`review/${productName}/${image[0].name}`);
+        const storageRef =  ref(storage,`review/${orderId}/${image[0].name}`);
+        
         await uploadBytes(storageRef, image[0]).then((snapshot) => {
-          
         });
-        const url = await getDownloadURL(ref(storage,`review/${productName}/${image[0].name}`))
+
+        const url = await getDownloadURL(ref(storage,`review/${orderId}/${image[0].name}`))
         photosURLs.push(url);
       })
     );
@@ -74,23 +75,22 @@ export default function ProductReviewPage({params}:{params:TParams}) {
         title: formInput.title,
         content:formInput.content,
         author:user,
-        product:productName,
+        product:orderName,
+        orderId,
       }
       
       const docRef = doc(collection(db,"review"));
-      const refId = docRef.id;
 
-      await setDoc(docRef,{...reviewData, id:refId}).then(()=>{
+      await Promise.all([
+        setDoc(docRef,reviewData).then(()=>{
+        }),
+        updateDoc(doc(db, "purchases",orderId),{review:true})
+      ]).then(()=>{
         alert('리뷰 작성이 완료되었습니다.');
         router.back();
-      });
-
-      
+      }).catch((error)=> console.log(error))
     }
-    
-   
   }
-
 
   const removeFile = (removeIndex:number) => {
     const newImageList = images.filter((_,index) => index !== removeIndex );
