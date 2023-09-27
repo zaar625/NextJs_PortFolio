@@ -42,13 +42,13 @@ export default async function RootLayout({
       <body className={inter.className}>
           <AuthSession session={session}>
             <ReduxProvider>
-              <Suspense fallback={<Loading/>}>
+              {/* <Suspense fallback={<Loading/>}> */}
                 <Header/>
                 <main style={{ minHeight: 'calc(100vh - 9rem)' }}>
                 {children}
                 </main>
                 <Footer/>
-              </Suspense>
+              {/* </Suspense> */}
             </ReduxProvider>
           </AuthSession>
       </body>

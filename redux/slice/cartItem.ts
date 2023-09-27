@@ -1,8 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-
-
-// const localitems =(localStorage.getItem('cartItems') !== null) ? JSON.parse(localStorage.getItem('cartItems')) : []
-
 // 로컬스토리지 아이템 가져오기
 const getCartList = () => {
   let localStorageItem;

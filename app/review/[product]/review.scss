@@ -144,6 +144,9 @@
 
         &__userImage{
             width:100%;
+            @include flex(center, unset);
+            gap:1rem;
+            
             & > li {
                 position: relative;
                 width: 80px;

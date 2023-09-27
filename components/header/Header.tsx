@@ -1,26 +1,30 @@
 'use client'
 
-import React,{useState,useEffect,useRef} from 'react';
-import { usePathname } from 'next/navigation'
+import React,{useState,useEffect,useRef ,useCallback} from 'react';
 import Link from 'next/link';
 import {AiOutlineMenu,AiOutlineClose} from 'react-icons/ai'
-import { headerNav , productNav} from '@/constant/navigation';
+import { productNav} from '@/constant/navigation';
 import { useSession,signOut } from "next-auth/react"
 import {auth} from '@/lib/firebaseConfig'
-
+import { onAuthStateChanged } from 'firebase/auth';
+import { doc,onSnapshot } from 'firebase/firestore';
+import { db } from '@/lib/firebaseConfig';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
 import './header.scss';
 
-
 export default function Header() {
-  const [menuIsActive, setMenuIsActive] = useState(false) 
-  const { data: snsSession } = useSession()
-  const firebaseUser = auth.currentUser ;
-  
-  const headerRef = useRef<HTMLDivElement>(null);
-  const pathName = usePathname();
-  
+  const [menuIsActive, setMenuIsActive] = useState(false);
+  const [firebaseUser, setFirebaseUser] = useState<null | string>(null);
+  const { data: snsSession } = useSession();
+  const nonUserCartItems = useSelector((state: RootState) => state.cartItem.items);
+  const [cartLength, setCartLength] = useState(0);
 
-  const isUser = firebaseUser || snsSession
+  const headerRef = useRef<HTMLDivElement>(null);
+
+  const isUser = firebaseUser || snsSession?.user?.name;
+
+  console.log(nonUserCartItems)
 
   useEffect(() => {
     const shrinkHeader = () => {
@@ -37,6 +41,7 @@ export default function Header() {
       }
     };
     window.addEventListener('scroll', shrinkHeader);
+
     return () => {
       window.removeEventListener('scroll', shrinkHeader);
     };
@@ -57,6 +62,37 @@ export default function Header() {
     }
   }
 
+  useEffect(()=>{
+    // 파이어베이스 로그인 상태 확인
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/auth.user
+        const uid = user.uid;
+        setFirebaseUser(user.uid)
+        // ...
+      } else {
+        setFirebaseUser(null);
+        // User is signed out
+        // ...
+      }
+    });
+    return unsubscribe;
+  },[]);
+
+  const getUserCartItem = useCallback(() => {
+    if(isUser) {
+      onSnapshot(doc(db, "user", isUser), (doc) => {
+        const data = doc.data();
+        setCartLength(data?.cart.length);
+      });
+    }
+  },[isUser]);
+
+  useEffect(()=>{
+    getUserCartItem();
+  },[isUser])
+
   return (
     <header ref ={headerRef}className='header'>
       <nav className='header__wrap'>
@@ -66,24 +102,19 @@ export default function Header() {
               BABAN
             </Link>
           </p>
-          <button aria-label="메뉴 버튼" type ='button' className='menu' onClick={()=>setMenuIsActive(!menuIsActive)}>
+          <button aria-label="메뉴 버튼" type ='button' className='menu' onClick={()=> setMenuIsActive(!menuIsActive)}>
           {menuIsActive ? <AiOutlineClose/> : <AiOutlineMenu/> }   
           </button>
           <ul className='header__nav-right'>
-          <li>
-            {isUser ? <button onClick={logout}>logout</button> : <Link href={'/login'}>login</Link>}
-          </li>
-          <li>
-            {isUser && <Link href={'/mypage'}>mypage</Link>}
-          </li>
-          {headerNav.map((link, index) => {
-          const isActive = pathName === link.path;
-          return (
-            <li key={index}>
-              <Link  href={link.path} key={link.display} className={`${isActive ? 'active' : ''}`}>{link.display}</Link>
+            <li>
+              {isUser ? <button onClick={logout}>logout</button> : <Link href={'/login'}>login</Link>}
             </li>
-          )
-        })}
+            <li>
+              {isUser && <Link href={'/mypage'}>mypage</Link>}
+            </li>
+            <li>
+              <Link href={'/cart'}>{`cart(${isUser ? cartLength : nonUserCartItems.length})`}</Link>
+            </li>
           </ul>
         </div>
           {menuIsActive &&(

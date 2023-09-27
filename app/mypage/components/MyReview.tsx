@@ -1,7 +1,7 @@
 'use client'
 
 import React, {useEffect, useState} from 'react'
-import { collection,query,where,getDocs,DocumentData,deleteDoc,doc } from 'firebase/firestore';
+import { collection,query,where,getDocs,DocumentData,deleteDoc,doc, orderBy } from 'firebase/firestore';
 import { db } from '@/lib/firebaseConfig';
 import { useSession } from 'next-auth/react';
 import {auth} from '@/lib/firebaseConfig'
@@ -16,7 +16,7 @@ export default function MyReview() {
 
     async function getMyReview(){
       const docRef = collection(db, "review");
-      const q = query(docRef, where('author', '==',`${user}`));
+      const q = query(docRef, where('author', '==',`${user}`), orderBy('date','desc'));
       const querySnapshot = (await getDocs(q)).docs;
       const reviews = querySnapshot.map((item) => item.data());
 

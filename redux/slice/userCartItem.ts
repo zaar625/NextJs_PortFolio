@@ -1,4 +1,4 @@
-/* eslint-disable prettier/prettier */
+
 import { createSlice } from '@reduxjs/toolkit';
 import { doc, setDoc,getFirestore } from "firebase/firestore"; 
 import {app} from '@/lib/firebaseConfig'

@@ -1,26 +1,39 @@
-import React from 'react'
-import { collection, query, where, getDocs } from "firebase/firestore";
+'use client'
+
+import React,{useEffect, useState} from 'react'
+import { collection, query, where, getDocs, limit, DocumentData, startAt,orderBy } from "firebase/firestore";
 import { db } from '@/lib/firebaseConfig';
 import Image from 'next/image';
 import format from 'date-fns/format';
 import '@/app/review/[product]/review.scss'
+import { limitToFirst } from 'firebase/database';
 
-async function getReviewData(q:string) {
-  const queryParams = query(collection(db, "review"), where("product", "==", q));
-  const querySnapshot = (await getDocs(queryParams)).docs;
 
-  return querySnapshot.map((doc) => doc.data())
-}
 
-export default async function Review({productName,productInfo}:{productName:string,productInfo:any}) {
-  const data = await getReviewData(productName)
+export default  function Review({productInfo}:{productInfo:any}) {
+  const [reviews, setReview] = useState<DocumentData[]>();
+  const [currentPage, setCurrentPage] = useState(1);
+
+  async function getReviewData() {
+    const reviewsPerPage = 2;
+    const offset = (currentPage - 1) * reviewsPerPage;
+    const queryParams = query(collection(db, "review"), where("product", "==", productInfo.name),orderBy('date','desc'),limit(reviewsPerPage),startAt('2'));
+    const querySnapshot = (await getDocs(queryParams)).docs;
+  
+    const res = querySnapshot.map((doc) => doc.data())
+    setReview(res)
+    
+  }
+
+useEffect(()=>{
+  getReviewData();
+},[currentPage])
 
   return (
     <div className='review-card'>
       {
-        data.map((item, index) => <ReviewItem key={index} reviewData={item} productInfo={productInfo}/>)
+        reviews?.map((item, index) => <ReviewItem key={index} reviewData={item} productInfo={productInfo}/>)
       }
-      
     </div>
   )
 }
@@ -46,7 +59,7 @@ function ReviewItem({reviewData,productInfo}:any) {
         </div>
       </div>
       {/* 내용 */}
-      <div className='review-card__item__contents'>
+      <div className='review-card__item__contents mb-1'>
         <p>제목: {reviewData.title}</p>
         <p>내용:</p>
         <p>{reviewData.content}</p>
