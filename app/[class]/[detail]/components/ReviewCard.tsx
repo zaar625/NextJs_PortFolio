@@ -14,8 +14,11 @@ export default  function Review({productInfo}:{productInfo:any}) {
   const [reviews, setReview] = useState<DocumentData[]>();
   const [currentPage, setCurrentPage] = useState(1);
 
+<<<<<<< HEAD
 // console.log(productInfo.name)
 
+=======
+>>>>>>> d6ce32d (무한로딩 error edit)
   async function getReviewData() {
     const reviewsPerPage = 2;
     const offset = (currentPage - 1) * reviewsPerPage;
@@ -27,10 +30,13 @@ export default  function Review({productInfo}:{productInfo:any}) {
     
   }
 
+<<<<<<< HEAD
 //  const onPageButton = (pageNum:number) => {
 //   setCurrentPage(pageNum);
 //  }
 
+=======
+>>>>>>> d6ce32d (무한로딩 error edit)
 useEffect(()=>{
   getReviewData();
 },[currentPage])
@@ -40,8 +46,11 @@ useEffect(()=>{
       {
         reviews?.map((item, index) => <ReviewItem key={index} reviewData={item} productInfo={productInfo}/>)
       }
+<<<<<<< HEAD
       <button>1</button>
       {/* <button onClick={() => onPageButton(2)}>2</button> */}
+=======
+>>>>>>> d6ce32d (무한로딩 error edit)
     </div>
   )
 }

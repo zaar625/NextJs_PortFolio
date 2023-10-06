@@ -52,8 +52,9 @@ export default function ProductDesc({product}:any) {
     if(!color) alert('색상을 선택해주세요.');
   }
 
-  const addToCart = useCallback(async () => {
+  const addToCart = async () => {
     if(color === '') return alert('색상을 선택해 주세요');
+    console.log(isLoginUser)
 
     const newItem = {
       name: product[0].name,
@@ -96,61 +97,60 @@ export default function ProductDesc({product}:any) {
       } else {
         await setDoc(doc(db, "user", isLoginUser),{cart:[{...newItem, id:0}]}).then(()=>alert('장바구니에 담겼습니다.'));
       }
-      // alert('장바구니에 담겼습니다.');
     } else {
       dispatch(addItem(newItem));
       alert('장바구니에 담겼습니다.');
     }
    
-  }, [color,quantity]);
+  }
 
   return (
   <div className='productDetail__des'>
-      <div className="productDetail__des__container">
-            <h1>{product[0].name}</h1>
-            <figcaption>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industrys standard dummy text
-              ever since the 1500s,
-            </figcaption>
-            <p>색상을 선택해 주세요.</p>
-            <div className="productDetail__des__container__color">
-              {product[0].color.map((e:string, i:number) => (
-                <button
-                  tabIndex={0}
-                  key={i}
-                  className={`color ${color === e ? 'color_active' : ''}`}
-                  onClick={() => setColor(e)}
-                >
-                  <div
-                    className="circle"
-                    style={{ backgroundColor: `${e}` }}
-                  ></div>
-                  <div>{e}</div>
-                </button>
-              ))}
-            </div>
-            <div className="productDetail__des__quan">
-                  <AiOutlineMinusSquare onClick={() => updateQuantity('minus')} />
-                  <div>{quantity}</div>
-                  <AiOutlinePlusSquare onClick={() => updateQuantity('plus')} />
-            </div>
-            <div className="productDetail__des__btns">
-              <BaseButton onClick={addToCart}>카트에 담기</BaseButton>
-              {
-                isLoginUser && color.length ? (
-                  <BaseButton>
-                    <Link href={{
-                    pathname:'/purchase',
-                    query:{id:product[0].name, color,quantity ,totalPrice:quantity*product[0].price}
-                    }}>구매하기</Link>
-                  </BaseButton>    
-                ) : (
-                  <BaseButton onClick={nonUserBtnClickHandler}>구매하기</BaseButton>
-                )
-              }           
-            </div>
-      </div>
+    <div className="productDetail__des__container">
+          <h1>{product[0].name}</h1>
+          <figcaption>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industrys standard dummy text
+            ever since the 1500s,
+          </figcaption>
+          <p>색상을 선택해 주세요.</p>
+          <div className="productDetail__des__container__color">
+            {product[0].color.map((e:string, i:number) => (
+              <button
+                tabIndex={0}
+                key={i}
+                className={`color ${color === e ? 'color_active' : ''}`}
+                onClick={() => setColor(e)}
+              >
+                <div
+                  className="circle"
+                  style={{ backgroundColor: `${e}` }}
+                ></div>
+                <div>{e}</div>
+              </button>
+            ))}
+          </div>
+          <div className="productDetail__des__quan">
+                <AiOutlineMinusSquare onClick={() => updateQuantity('minus')} />
+                <div>{quantity}</div>
+                <AiOutlinePlusSquare onClick={() => updateQuantity('plus')} />
+          </div>
+          <div className="productDetail__des__btns">
+            <BaseButton onClick={addToCart}>카트에 담기</BaseButton>
+            {
+              isLoginUser && color.length ? (
+                <BaseButton>
+                  <Link href={{
+                  pathname:'/purchase',
+                  query:{id:product[0].name, color,quantity ,totalPrice:quantity*product[0].price}
+                  }}>구매하기</Link>
+                </BaseButton>    
+              ) : (
+                <BaseButton onClick={nonUserBtnClickHandler}>구매하기</BaseButton>
+              )
+            }           
+          </div>
+    </div>
   </div>
   )
 }
