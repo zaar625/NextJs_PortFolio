@@ -26,6 +26,7 @@ export default function Header() {
 
   useEffect(() => {
     const shrinkHeader = () => {
+      console.log('스크롤')
       if (headerRef !== null) {
         if (
           document.body.scrollTop > 50 ||
@@ -112,13 +113,12 @@ export default function Header() {
             <li>
               {isUser && <Link href={'/mypage'}>mypage</Link>}
             </li>
-            <li>
+            {/* <li>
               {
                 isUser ?  <Link href={'/cart'}>{`cart(${cartLength})`}</Link> :  <Link href={'/cart'}>{`cart(${nonUserCartItems.length})`}</Link>
               }
-             
-
-            </li>
+            </li> */}
+            <li> <Link href={'/cart'}>cart</Link></li>
           </ul>
         </div>
           {menuIsActive &&(
