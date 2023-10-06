@@ -7,7 +7,7 @@ import {ref ,getDownloadURL,uploadBytes} from "firebase/storage";
 import {doc,updateDoc} from "firebase/firestore";
 import { useRouter } from 'next/navigation';
 import { db } from '@/lib/firebaseConfig';
-import '@/app/review/[product]/review.scss';
+import '@/app/review/[orederId]/review.scss';
 
 export default function EditReviewPage({searchParams}:any) {
     const router = useRouter();

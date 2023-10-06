@@ -84,12 +84,14 @@ export default function Header() {
         const data = doc.data();
         setCartLength(data?.cart.length);
       });
+    }else {
+      setCartLength(nonUserCartItems.length);
     }
   },[isUser]);
 
   useEffect(()=>{
     getUserCartItem();
-  },[isUser])
+  },[isUser,nonUserCartItems])
 
   return (
     <header ref ={headerRef}className='header'>
@@ -115,6 +117,7 @@ export default function Header() {
                 isUser ?  <Link href={'/cart'}>{`cart(${cartLength})`}</Link> :  <Link href={'/cart'}>{`cart(${nonUserCartItems.length})`}</Link>
               }
              
+
             </li>
           </ul>
         </div>
