@@ -23,8 +23,7 @@ export default function Header() {
   const headerRef = useRef<HTMLDivElement>(null);
 
   const isUser = firebaseUser || snsSession?.user?.name;
-
-  console.log(nonUserCartItems)
+  console.log(isUser)
 
   useEffect(() => {
     const shrinkHeader = () => {
@@ -80,20 +79,14 @@ export default function Header() {
     return unsubscribe;
   },[]);
 
-  const getUserCartItem = useCallback(() => {
+  useEffect(()=>{
     if(isUser) {
       onSnapshot(doc(db, "user", isUser), (doc) => {
         const data = doc.data();
         setCartLength(data?.cart.length);
       });
-    }else {
-      setCartLength(nonUserCartItems.length);
     }
-  },[isUser]);
-
-  useEffect(()=>{
-    getUserCartItem();
-  },[isUser,nonUserCartItems])
+  },[isUser])
 
   return (
     <header ref ={headerRef}className='header'>
@@ -115,7 +108,10 @@ export default function Header() {
               {isUser && <Link href={'/mypage'}>mypage</Link>}
             </li>
             <li>
-              <Link href={'/cart'}>{`cart(${cartLength})`}</Link>
+              {
+              isUser ?  <Link href={'/cart'}>{`cart(${cartLength})`}</Link> :  <Link href={'/cart'}>{`cart(${nonUserCartItems.length})`}</Link>
+              }
+             
             </li>
           </ul>
         </div>
