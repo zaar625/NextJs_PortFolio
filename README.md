@@ -1,34 +1,17 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# ECommerce Shop Web Site
+리액트와 차별되는 점이 무엇인지,서버사이드 렌더링이 가지는 장점이 무엇인지 글이 아닌 직접 체감하고자 만든 프로젝트입니다.
+<br>더나아가 React 와 Next.js의 light_house 비교해봅니다. 
 
-## Getting Started
-
-First, run the development server:
-
+## 사용 스킬
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+"Next.js(app router)", "@reduxjs/toolkit", "Google firebase",
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 페이지 상세
+### 1. 홈
+해당 페이지는 메인 홈페이지 진입점으로 사용자가 검색시 잘 노출 될 수 있도록 사전렌더링 진행합니다. 
+왼쪽의 경우 리액트로 개발된 홈이며 오른쪽은 next js로 개발된 홈입니다. 리액트의 경우 lazy함수를 통해 당장 필요하지 않은 리소스를 해당 페이지 진입 시점에 불러오도록 했는데요,
+1. 이미지 태그를 사용함으로서 이점:
+ - 뷰포트에 들어올 때만 이미지 로드, 최적화된 이미지 생성 후 동일한 요청에 대해서는 이미 만들어 높은 캐시로 사용됨을 알 수 있습니다.
+<개발자 도구의 네트워큿 사진>
+<개발자도구의 소스탭 비교 사진>
