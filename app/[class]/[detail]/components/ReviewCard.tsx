@@ -12,9 +12,9 @@ export default  function Review({productInfo}:{productInfo:any}) {
   const [currentPage, setCurrentPage] = useState(1);
 
   async function getReviewData() {
-    const reviewsPerPage = 2;
-    const offset = (currentPage - 1) * reviewsPerPage;
-    const queryParams = query(collection(db, "review"), where("product", "==", productInfo.name),orderBy('date','desc'),limit(reviewsPerPage),startAt('2'));
+    
+    
+    const queryParams = query(collection(db, "review"), where("product", "==", productInfo.name));
     const querySnapshot = (await getDocs(queryParams)).docs;
   
     const res = querySnapshot.map((doc) => doc.data())
@@ -24,7 +24,7 @@ export default  function Review({productInfo}:{productInfo:any}) {
 
 useEffect(()=>{
   getReviewData();
-},[currentPage])
+},[])
 
   return (
     <div className='review-card'>

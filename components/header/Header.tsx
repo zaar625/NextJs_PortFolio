@@ -23,10 +23,10 @@ export default function Header() {
   const headerRef = useRef<HTMLDivElement>(null);
 
   const isUser = firebaseUser || snsSession?.user?.name;
-  console.log(isUser)
 
   useEffect(() => {
     const shrinkHeader = () => {
+      console.log('스크롤')
       if (headerRef !== null) {
         if (
           document.body.scrollTop > 50 ||
@@ -79,14 +79,20 @@ export default function Header() {
     return unsubscribe;
   },[]);
 
-  useEffect(()=>{
+  const getUserCartItem = useCallback(() => {
     if(isUser) {
       onSnapshot(doc(db, "user", isUser), (doc) => {
         const data = doc.data();
         setCartLength(data?.cart.length);
       });
+    }else {
+      setCartLength(nonUserCartItems.length);
     }
-  },[isUser])
+  },[isUser]);
+
+  useEffect(()=>{
+    getUserCartItem();
+  },[isUser,nonUserCartItems])
 
   return (
     <header ref ={headerRef}className='header'>
@@ -107,12 +113,12 @@ export default function Header() {
             <li>
               {isUser && <Link href={'/mypage'}>mypage</Link>}
             </li>
-            <li>
+            {/* <li>
               {
-              isUser ?  <Link href={'/cart'}>{`cart(${cartLength})`}</Link> :  <Link href={'/cart'}>{`cart(${nonUserCartItems.length})`}</Link>
+                isUser ?  <Link href={'/cart'}>{`cart(${cartLength})`}</Link> :  <Link href={'/cart'}>{`cart(${nonUserCartItems.length})`}</Link>
               }
-             
-            </li>
+            </li> */}
+            <li> <Link href={'/cart'}>cart</Link></li>
           </ul>
         </div>
           {menuIsActive &&(
