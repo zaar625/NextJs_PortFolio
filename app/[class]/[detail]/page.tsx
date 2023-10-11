@@ -64,7 +64,8 @@ export default async function ProductiDetailPage({params}:any) {
       <ProductSlide product={product}/>
       <ProductDesc product={product}/>
     </figure>
-  
+    
+    <h1 className='mb-2'>REVIEWS</h1>
     <Review productInfo={product[0]}/>
   </section>
   )

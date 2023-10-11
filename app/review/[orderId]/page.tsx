@@ -18,6 +18,7 @@ type TParams = {
 
 export default function ProductReviewPage({params, searchParams}:{params:TParams, searchParams:any}) {
   const orderId = params.orderId;
+  console.log(orderId)
   const {orderName} = searchParams;
   const router = useRouter();
 
@@ -82,7 +83,7 @@ export default function ProductReviewPage({params, searchParams}:{params:TParams
       const docRef = doc(collection(db,"review"));
 
       await Promise.all([
-        setDoc(docRef,reviewData).then(()=>{
+        setDoc(doc(db,"review",orderId),reviewData).then(()=>{
         }),
         updateDoc(doc(db, "purchases",orderId),{review:true})
       ]).then(()=>{
