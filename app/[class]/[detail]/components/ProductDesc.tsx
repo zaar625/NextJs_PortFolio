@@ -54,7 +54,6 @@ export default function ProductDesc({product}:any) {
 
   const addToCart = async () => {
     if(color === '') return alert('색상을 선택해 주세요');
-    console.log(isLoginUser)
 
     const newItem = {
       name: product[0].name,

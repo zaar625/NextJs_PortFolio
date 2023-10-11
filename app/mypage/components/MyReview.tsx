@@ -7,12 +7,13 @@ import { useSession } from 'next-auth/react';
 import {auth} from '@/lib/firebaseConfig'
 import '../mypage.scss';
 import Link from 'next/link';
+import { ref } from 'firebase/storage';
 
 export default function MyReview() {
     const [reviewData, setReviewData] = useState<DocumentData[]>()
     const { data: snsSession } = useSession();
     const user = auth.currentUser?.uid || snsSession?.user?.name;
-    console.log(user)
+
 
     async function getMyReview(){
       const docRef = collection(db, "review");
@@ -42,14 +43,14 @@ export default function MyReview() {
     <div className='myReview'>
       <h1 className='mb-1'>작성한 글</h1>
       {
-        reviewData?.length ? reviewData.map((reviewItem, index) => (
-          <div key={index} className='myReview__card '>
+        reviewData?.length ? reviewData.map((reviewItem) => (
+          <div key={reviewItem.orderId} className='myReview__card '>
             <div className='myReview__card__product'>
               <p>상품: {reviewItem.product}</p>
               <p>제목: {reviewItem.title}</p>
             </div>
             <div className='myReview__card__btnWrap'>
-              <button onClick={() => deletReview(reviewItem.id)}>삭제</button>
+              <button onClick={() => deletReview(reviewItem.orderId)}>삭제</button>
               <Link href={{
                   pathname:'/mypage/editReview',
                   query:{

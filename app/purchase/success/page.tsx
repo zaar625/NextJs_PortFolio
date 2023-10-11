@@ -36,6 +36,7 @@ async function confirmTosspayments(query:TSearchParams) {
 async function savePurchaseItemDB(payment:any, userId: string) {
     const {method, orderId, orderName, totalAmount, approvedAt} = payment;
 
+    console.log('payment',payment)
     const filedValue = {
         userId,
         orderId,
@@ -48,6 +49,7 @@ async function savePurchaseItemDB(payment:any, userId: string) {
 
     try{
         await setDoc(doc(db, "purchases", payment.orderId),filedValue);
+        console.log('DB에 저장되었습니다.')
     } catch(err) {
         console.error("구매내역이 DB에 저장되지 않았습니다.", err);
     }

@@ -34,6 +34,5 @@ export async function POST(request: NextRequest ) {
             "Content-Type" : "application/json"
         }
     }).then(res =>{
-        console.log(res.json()) 
         res.json()});
 }

@@ -28,7 +28,6 @@ export default function Mypurchase() {
     getUserPurchaseItem();
   },[user]);
 
-  console.log(purchaseItem)
   return (
     <div className='purchase mb-2'>
       <h1 className='mb-1'>구매 내역</h1>

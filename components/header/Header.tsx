@@ -26,7 +26,7 @@ export default function Header() {
 
   useEffect(() => {
     const shrinkHeader = () => {
-      console.log('스크롤')
+  
       if (headerRef !== null) {
         if (
           document.body.scrollTop > 50 ||
