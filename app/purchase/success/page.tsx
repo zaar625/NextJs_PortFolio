@@ -36,7 +36,6 @@ async function confirmTosspayments(query:TSearchParams) {
 async function savePurchaseItemDB(payment:any, userId: string) {
     const {method, orderId, orderName, totalAmount, approvedAt} = payment;
 
-    console.log('payment',payment)
     const filedValue = {
         userId,
         orderId,

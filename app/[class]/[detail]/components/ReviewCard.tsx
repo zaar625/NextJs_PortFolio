@@ -27,11 +27,15 @@ useEffect(()=>{
 },[])
 
   return (
-    <div className='review-card'>
-      {
-        reviews?.map((item, index) => <ReviewItem key={index} reviewData={item} productInfo={productInfo}/>)
-      }
-    </div>
+    <>
+      <h1 className='mb-2'>REVIEWS</h1>
+      <div className='review-card'>
+        {reviews && reviews.length === 0 && <p>해당 상품에 대한 리뷰가 없습니다.</p>}
+        {
+          reviews?.map((item, index) => <ReviewItem key={index} reviewData={item} productInfo={productInfo}/>)
+        }
+      </div>
+    </>
   )
 }
 

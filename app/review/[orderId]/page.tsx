@@ -18,7 +18,6 @@ type TParams = {
 
 export default function ProductReviewPage({params, searchParams}:{params:TParams, searchParams:any}) {
   const orderId = params.orderId;
-  console.log(orderId)
   const {orderName} = searchParams;
   const router = useRouter();
 

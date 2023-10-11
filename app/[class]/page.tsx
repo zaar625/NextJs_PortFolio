@@ -18,6 +18,7 @@ export default async function ProductClassPage({params}:{params:{class:string}})
     <div className='product-class container'>
       <h1 className='mb-2'>{params.class}</h1>
       <div className='product-class__itemWrap'>
+        {data && data.length === 0 && <p>해당 카테고리에 등록된 상품이 없습니다.</p>}
         {data && data.map((item, index) => <ProductCard data={item} key={index}/>)}
       </div>
     </div>

@@ -31,7 +31,7 @@ export default function MyReview() {
     },[user])
 
    async function deletReview(refId:string) {
-    console.log(refId)
+    
       if (!confirm("게시물을 삭세하시겠습니까?")) {
           return;
       } else {

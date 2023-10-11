@@ -90,6 +90,10 @@
     grid-template-columns: repeat(3, 1fr);
     gap:10px;
 
+    & > p {
+        color:#6a6a6a
+    }
+
     @include mobile {
         grid-template-columns: repeat(2, 1fr);
     }
