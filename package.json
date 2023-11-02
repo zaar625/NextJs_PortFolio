@@ -1,6 +1,6 @@
 {
   "name": "nextjs_shop",
-  "sideEffects":false,
+  "sideEffects": false,
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -36,6 +36,14 @@
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^13.5.2",
+    "@testing-library/dom": "^9.3.3",
+    "@testing-library/jest-dom": "^6.1.4",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.5.1",
+    "@types/jest": "29.5.5",
+    "@types/react": "18.2.8",
+    "jest": "29.6.4",
+    "jest-environment-jsdom": "29.6.4",
     "encoding": "^0.1.13"
   }
 }
