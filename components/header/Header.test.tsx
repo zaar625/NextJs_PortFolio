@@ -1,6 +1,5 @@
-import { render, screen, fireEvent } from '@/utils/test-utils/renderWithContext';
+import { render, screen } from '@/utils/test-utils/renderWithContext';
 import Header from './Header';
-import { useSession } from 'next-auth/react';
 
 jest.mock('next-auth/react', () => {
   const originalModule = jest.requireActual('next-auth/react');
@@ -45,7 +44,7 @@ describe('사용자의 로그인 상태 여부 확인', () => {
     // Header 컴포넌트를 렌더링합니다.
     render(<Header />);
 
-    // 'logout' 텍스트가 렌더링되었는지 확인합니다.
+    //'logout' 텍스트가 렌더링되었는지 확인합니다.
     expect(screen.getByText('logout')).toBeInTheDocument();
   });
 });
