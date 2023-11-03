@@ -8,7 +8,7 @@ import { removeItem } from '@/redux/slice/cartItem';
 import { useSession } from 'next-auth/react';
 import {auth} from '@/lib/firebaseConfig'
 import { useDispatch } from 'react-redux';
-import numberWithCommas from '@/util/numberWithCommas';
+import numberWithCommas from '@/utils/numberWithCommas';
 import { collection ,query,where,getDocs} from 'firebase/firestore';
 import { db } from '@/lib/firebaseConfig';
 import '../cart.scss';

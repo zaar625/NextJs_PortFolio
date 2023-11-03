@@ -95,7 +95,7 @@ export default function Header() {
   },[isUser,nonUserCartItems])
 
   return (
-    <header ref ={headerRef}className='header'>
+    <header ref ={headerRef} className='header'>
       <nav className='header__wrap'>
         <div className='header__top container'>
           <p className='logo'>

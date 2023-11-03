@@ -8,8 +8,7 @@ import Footer from '@/components/footer/Footer';
 import { ReduxProvider } from '@/redux/ReduxProvider';
 import { headers } from 'next/headers'
 import { Session } from 'next-auth'
-import { Suspense } from 'react'
-import Loading from './loading';
+
 
 const inter = Inter({ subsets: ['latin'], fallback:['system-ui', 'arial'], display: 'swap', })
 

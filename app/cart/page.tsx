@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { db } from '@/lib/firebaseConfig';
 import {getDoc,doc, setDoc} from "firebase/firestore";
-import numberWithCommas from '@/util/numberWithCommas';
+import numberWithCommas from '@/utils/numberWithCommas';
 import BaseButton from '@/components/buttons/BaseButton';
 import { useRouter } from 'next/navigation';
 import './cart.scss';

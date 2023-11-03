@@ -3,7 +3,7 @@
 import React,{useState} from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import numberWithCommas from '@/util/numberWithCommas';
+import numberWithCommas from '@/utils/numberWithCommas';
 import './product-card.scss';
 
 export default function ProductCard({data}:any) {
