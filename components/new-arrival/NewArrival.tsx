@@ -1,7 +1,6 @@
 import './new-arrival.scss';
 
 import React from 'react';
-import ProductCard from '../product/ProductCard';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../../lib/firebaseConfig';
 import NewArrivalTitle from './NewArrivalTitle';
@@ -26,7 +25,6 @@ export default async function NewArrival() {
 
   const querySnapshot = (await getDocs(q)).docs;
   const products: IProduct[] = querySnapshot.map(item => item.data() as IProduct);
-
   const data = products.slice(0, 5);
 
   return (
