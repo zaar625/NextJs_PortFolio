@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`사용자가 로그인상태라면 로그아웃 링크가 있어야합니다. 1`] = `Promise {}`;
