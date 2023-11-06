@@ -29,22 +29,17 @@ describe('사용자의 로그인 상태 여부 확인', () => {
     const mockUseSession = jest.requireMock('next-auth/react').useSession;
     mockUseSession.mockReturnValueOnce({ data: null });
 
-    // Header 컴포넌트를 렌더링합니다.
     render(<Header />);
 
-    // 'login' 텍스트가 렌더링되었는지 확인합니다.
     expect(screen.getByText('login')).toBeInTheDocument();
   });
 
   it('renders logout button when user is authenticated', () => {
-    // 모킹된 useSession 함수의 반환값을 설정합니다.
     const mockUseSession = jest.requireMock('next-auth/react').useSession;
     mockUseSession.mockReturnValueOnce({ data: { user: { name: 'testUser' } } });
 
-    // Header 컴포넌트를 렌더링합니다.
     render(<Header />);
 
-    //'logout' 텍스트가 렌더링되었는지 확인합니다.
     expect(screen.getByText('logout')).toBeInTheDocument();
   });
 });
