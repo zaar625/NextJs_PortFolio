@@ -1,55 +1,42 @@
 import './new-arrival.scss';
 
 import React from 'react';
-import BaseButton from '../buttons/BaseButton';
-import Link from 'next/link';
-import Image from 'next/image';
 import ProductCard from '../product/ProductCard';
-import { collection, getFirestore, query, where, getDocs } from 'firebase/firestore';
+import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../../lib/firebaseConfig';
+import NewArrivalTitle from './NewArrivalTitle';
+import NewArrivalHighLight from './NewArrivalHighLight';
+import NewProductList from './NewProductList';
 
-import newItemImg1 from '../../public/images/new-main1.jpg';
-import newItemImg2 from '../../public/images/new-main2.jpg';
+export interface IProduct {
+  class: string;
+  color: string[];
+  image: string;
+  imageDetail: string[];
+  name: string;
+  price: number;
+  stock: number;
+  ver: string;
+  size: 's' | 'm'[];
+}
 
 export default async function NewArrival() {
   const docRef = collection(db, 'products');
-  const docSnap = await getDocs(docRef);
   const q = query(docRef, where('ver', '==', 'new'));
 
   const querySnapshot = (await getDocs(q)).docs;
-  const products = querySnapshot.map(item => item.data());
+  const products: IProduct[] = querySnapshot.map(item => item.data() as IProduct);
 
   const data = products.slice(0, 5);
-  console.log(products);
 
   return (
     <section className="new-arrival mb-4 container">
-      <div className="new-arrival__title">
-        <h1>New Arrival</h1>
-        <Link href={'/'}>
-          <BaseButton>View more</BaseButton>
-        </Link>
-      </div>
-      <div className="new-arrival__image-box">
-        <Image src={newItemImg1} alt="신규 상품" sizes="50vw" />
-        <Image src={newItemImg2} alt="신규 상품" sizes="50vw" />
-      </div>
-      <div className="new-arrival__des-box">
-        <h1>
-          CHANGING THE <span>IDEAL</span> OF BEAUTY
-        </h1>
-        <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-          been the industry standard dummy text ever since the 1500s, when an unknown printer took a
-          galley of type and scrambled it to make a type specimen book. It has survived not only
-          five{' '}
-        </p>
-      </div>
-      <div className="products-container">
-        {data.map((product, index) => (
-          <ProductCard data={product} key={index} />
-        ))}
-      </div>
+      {/* 타이틀 */}
+      <NewArrivalTitle />
+      {/* 대표*/}
+      <NewArrivalHighLight />
+      {/* 상품들 */}
+      <NewProductList productList={data} />
     </section>
   );
 }
