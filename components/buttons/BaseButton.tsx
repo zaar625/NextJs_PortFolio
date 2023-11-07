@@ -8,11 +8,7 @@ type Props = {
 };
 const Button = (props: Props) => {
   return (
-    <button
-      type='button'
-      className={`btn-outline btn ${props.className}`}
-      onClick={props.onClick}
-    >
+    <button type="button" className={`btn-outline btn ${props.className}`} onClick={props.onClick}>
       {props.children}
     </button>
   );

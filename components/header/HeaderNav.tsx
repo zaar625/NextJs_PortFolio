@@ -18,7 +18,9 @@ export default function HeaderNav() {
 function NavItem({ navName }: { navName: string }) {
   return (
     <li>
-      <Link href={`/${navName}`}>{navName}</Link>
+      <Link prefetch={false} href={`/${navName}`}>
+        {navName}
+      </Link>
     </li>
   );
 }
@@ -41,7 +43,13 @@ function LoginNav() {
   };
   return (
     <li data-testid="login-state">
-      {isUser ? <button onClick={logout}>logout</button> : <Link href={'/login'}>login</Link>}
+      {isUser ? (
+        <button onClick={logout}>logout</button>
+      ) : (
+        <Link prefetch={true} href={'/login'}>
+          login
+        </Link>
+      )}
     </li>
   );
 }

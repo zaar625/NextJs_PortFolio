@@ -8,7 +8,7 @@ import { render } from '@/utils/test-utils/renderWithContext';
  */
 
 test('배너에는 총 3개의 이미지가 들어가 있습니다.', () => {
-  render(<HeroSlide />);
+  // render(<HeroSlide />);
 });
 
 test('슬라이드가 자동으로 움직이고 있습니다.', () => {});

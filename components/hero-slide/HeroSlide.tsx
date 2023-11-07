@@ -11,8 +11,8 @@ import { GrFormNext, GrFormPrevious } from 'react-icons/gr';
 import BaseButton from '../buttons/BaseButton';
 import { FiPlay } from 'react-icons/fi';
 
-import 'swiper/swiper.min.css';
 import './hero-slide.scss';
+import 'swiper/css';
 
 export default function HeroSlide() {
   const [pageNum, setPageNum] = useState(1);
