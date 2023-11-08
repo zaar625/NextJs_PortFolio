@@ -1,7 +1,7 @@
 import React from 'react';
 import { DocumentData } from 'firebase/firestore';
 import Image from 'next/image';
-import numberWithCommas from '@/util/numberWithCommas';
+import numberWithCommas from '@/utils/numberWithCommas';
 import '../purchase.scss';
 
 type TProps = {
