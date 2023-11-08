@@ -4,15 +4,16 @@ import Link from 'next/link';
 import { db } from '../../lib/firebaseConfig';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import NewProductList from '../new-arrival/NewProductList';
+import { IProduct } from '../new-arrival/NewArrival';
 
 export default async function Trend() {
   const docRef = collection(db, 'products');
   const q = query(docRef, where('ver', '==', 'trend'));
 
   const querySnapshot = (await getDocs(q)).docs;
-  const products = querySnapshot.map(item => item.data());
+  const products: IProduct[] = querySnapshot.map(item => item.data() as IProduct);
 
-  const data = products.slice(0, 5);
+  const data: IProduct[] = products.slice(0, 5);
 
   return (
     <section className="new-arrival mb-4 container">
