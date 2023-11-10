@@ -101,4 +101,12 @@ test('수량의 플러스 아이콘을 클릭하면 현재 수량의 +1이 됩�
   }
 });
 
-test('카트에 담기 버튼과 구매하기 버튼이 있습니다.', () => {});
+test('카트에 담기 버튼과 구매하기 버튼이 있습니다.', async () => {
+  render(<ProductDesc product={mockProducts} />);
+
+  const addToCartButton = await screen.findByText('카트에 담기');
+  expect(addToCartButton).toBeInTheDocument();
+
+  const purchaseButton = await screen.findByText('구매하기');
+  expect(purchaseButton).toBeInTheDocument();
+});
