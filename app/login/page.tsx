@@ -53,6 +53,7 @@ export default function LoginPage() {
             이메일
           </label>
           <input
+            data-test="email"
             type="email"
             name="email"
             className="login__email__input"
@@ -65,6 +66,7 @@ export default function LoginPage() {
             비밀번호
           </label>
           <input
+            data-test="password"
             name="password"
             type="password"
             className="login__password__input"

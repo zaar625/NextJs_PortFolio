@@ -1,11 +1,25 @@
+const auth = require('../fixtures/session.json');
+
 describe('로그인 과정', () => {
-  it('로그인 버튼이 있는지 확인 후 로그인페이지로 이동', () => {
-    cy.visit('/');
-    cy.contains('login').should('exist').click();
-    cy.url().should('include', '/login');
+  const { email, password } = auth;
+
+  it('로그인하기', () => {
+    cy.visit('/login');
+    cy.get('[data-test=email]').type(email);
+    cy.get('[data-test=password]').type(password);
+
+    cy.get('.login__button')
+      .contains('로그인')
+      .click()
+      .then(() => {
+        cy.get('.login__form').submit();
+      });
   });
 
-  context('로그인 성공하면', () => {
-    it('홈에 로그인 버튼이 보여아함.', () => {});
+  it('로그아웃', () => {
+    cy.visit('/');
+    cy.contains('logout').click();
+
+    cy.logout();
   });
 });
