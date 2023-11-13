@@ -33,7 +33,7 @@ export default function ProductCard({ data, children }: any) {
 
   return (
     <>
-      <Link href={`/${data.class}/${data.name}`}>
+      <Link data-test="product-card" href={`/${data.class}/${data.name}`}>
         <div className="product-card">{children}</div>
         <p className="product-card__name">{data.name}</p>
       </Link>
