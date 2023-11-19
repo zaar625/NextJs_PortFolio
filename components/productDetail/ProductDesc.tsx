@@ -119,7 +119,7 @@ export default function ProductDesc({ product }: any) {
     <div className="productDetail__des">
       <div className="productDetail__des__container">
         <h1>{product[0].name}</h1>
-        <figcaption>
+        <figcaption data-testid="custom-figcaption">
           Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
           been the industrys standard dummy text ever since the 1500s,
         </figcaption>
@@ -138,9 +138,9 @@ export default function ProductDesc({ product }: any) {
           ))}
         </div>
         <div className="productDetail__des__quan">
-          <AiOutlineMinusSquare onClick={() => updateQuantity('minus')} />
-          <div>{quantity}</div>
-          <AiOutlinePlusSquare onClick={() => updateQuantity('plus')} />
+          <AiOutlineMinusSquare className="minus-icon" onClick={() => updateQuantity('minus')} />
+          <p>{quantity}</p>
+          <AiOutlinePlusSquare className="plus-icon" onClick={() => updateQuantity('plus')} />
         </div>
         <div className="productDetail__des__btns">
           <BaseButton onClick={addToCart}>카트에 담기</BaseButton>
